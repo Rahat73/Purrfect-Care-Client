@@ -69,6 +69,15 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        {user?.email ? (
+          <NavbarItem className="gap-2">
+            <NavbarDropdown />
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="gap-2">
+            <Link href="/login">Login</Link>
+          </NavbarItem>
+        )}
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
