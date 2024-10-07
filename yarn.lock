@@ -282,6 +282,21 @@
     "@react-types/button" "3.9.4"
     "@react-types/shared" "3.23.1"
 
+"@nextui-org/card@^2.0.34":
+  version "2.0.34"
+  resolved "https://registry.yarnpkg.com/@nextui-org/card/-/card-2.0.34.tgz#d9c7f68f84f86dcb4965a365a59e122e75e252b4"
+  integrity sha512-2RYNPsQkM0FOifGCKmRBR3AuYgYCNmPV7dyA5M3D9Lf0APsHHtsXRA/GeIJ/AuPnglZrYBX8wpM5kLt3dnlQjQ==
+  dependencies:
+    "@nextui-org/react-utils" "2.0.17"
+    "@nextui-org/ripple" "2.0.33"
+    "@nextui-org/shared-utils" "2.0.8"
+    "@nextui-org/use-aria-button" "2.0.10"
+    "@react-aria/button" "3.9.5"
+    "@react-aria/focus" "3.17.1"
+    "@react-aria/interactions" "3.21.3"
+    "@react-aria/utils" "3.24.1"
+    "@react-types/shared" "3.23.1"
+
 "@nextui-org/code@2.0.33":
   version "2.0.33"
   resolved "https://registry.yarnpkg.com/@nextui-org/code/-/code-2.0.33.tgz#04ba9280e08505c6c4a57cac029f6db1411cac55"
@@ -325,6 +340,15 @@
     "@nextui-org/shared-utils" "2.0.8"
     "@nextui-org/system" "2.2.6"
     "@nextui-org/use-measure" "2.0.2"
+
+"@nextui-org/image@^2.0.32":
+  version "2.0.32"
+  resolved "https://registry.yarnpkg.com/@nextui-org/image/-/image-2.0.32.tgz#4011ca965f691a615fcc396aaf09542ebcc47927"
+  integrity sha512-JpE0O8qAeJpQA61ZnXNLH76to+dbx93PR5tTOxSvmTxtnuqVg4wl5ar/SBY3czibJPr0sj33k8Mv2EfULjoH7Q==
+  dependencies:
+    "@nextui-org/react-utils" "2.0.17"
+    "@nextui-org/shared-utils" "2.0.8"
+    "@nextui-org/use-image" "2.0.6"
 
 "@nextui-org/input@2.2.5":
   version "2.2.5"
@@ -509,6 +533,14 @@
   resolved "https://registry.yarnpkg.com/@nextui-org/shared-utils/-/shared-utils-2.0.8.tgz#6e6e71a067c273581839c2226fd9fb4e1e3a3410"
   integrity sha512-ZEtoMPXS+IjT8GvpJTS9IWDnT1JNCKV+NDqqgysAf1niJmOFLyJgl6dh/9n4ufcGf1GbSEQN+VhJasEw7ajYGQ==
 
+"@nextui-org/skeleton@^2.0.32":
+  version "2.0.32"
+  resolved "https://registry.yarnpkg.com/@nextui-org/skeleton/-/skeleton-2.0.32.tgz#3815157bd137e5dd4004db22af0c56c6b216d7da"
+  integrity sha512-dS0vuRrc4oWktW3wa/KFhcBNnV0oiDqKXP4BqRj7wgS01fOAqj3cJiqwUDLKO8GbEnxLkbqLBFcUoLgktpRszQ==
+  dependencies:
+    "@nextui-org/react-utils" "2.0.17"
+    "@nextui-org/shared-utils" "2.0.8"
+
 "@nextui-org/snippet@2.0.43":
   version "2.0.43"
   resolved "https://registry.yarnpkg.com/@nextui-org/snippet/-/snippet-2.0.43.tgz#759ac8b4693c6dd1a95f40520f92476f7fc2843b"
@@ -522,6 +554,15 @@
     "@nextui-org/use-clipboard" "2.0.7"
     "@react-aria/focus" "3.17.1"
     "@react-aria/utils" "3.24.1"
+
+"@nextui-org/spacer@^2.0.33":
+  version "2.0.33"
+  resolved "https://registry.yarnpkg.com/@nextui-org/spacer/-/spacer-2.0.33.tgz#6c8bb36fbe7e7e135f5e8dac9b2a92324b930db9"
+  integrity sha512-0YDtovMWuAVgBvVXUmplzohObGxMPFhisHXn6v+0nflAE9LiVeiXf121WVOEMrd08S7xvmrAANcMwo4TsYi49g==
+  dependencies:
+    "@nextui-org/react-utils" "2.0.17"
+    "@nextui-org/shared-utils" "2.0.8"
+    "@nextui-org/system-rsc" "2.1.6"
 
 "@nextui-org/spinner@2.0.34":
   version "2.0.34"
@@ -587,7 +628,7 @@
     tailwind-merge "^1.14.0"
     tailwind-variants "^0.1.20"
 
-"@nextui-org/tooltip@2.0.41":
+"@nextui-org/tooltip@2.0.41", "@nextui-org/tooltip@^2.0.41":
   version "2.0.41"
   resolved "https://registry.yarnpkg.com/@nextui-org/tooltip/-/tooltip-2.0.41.tgz#a2027bf1e0f836c98bfd6bcc541cfbdda711f4be"
   integrity sha512-1c+vkCCszKcKl15HywlZ7UOL7c1UFgLudqBB/dEdWZiclT01BRiracMbcQ7McKHQCRl77Aa7LFv5x4wHOicWHQ==
@@ -1468,25 +1509,17 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.13.tgz#2af91918ee12d9d32914feb13f5326658461b451"
   integrity sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==
 
-"@types/react-dom@18.3.0":
+"@types/react-dom@^18.3.0":
   version "18.3.0"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.3.0.tgz#0cbc818755d87066ab6ca74fbedb2547d74a82b0"
   integrity sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@^18.3.11":
   version "18.3.11"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.11.tgz#9d530601ff843ee0d7030d4227ea4360236bd537"
   integrity sha512-r6QZ069rFTjrEYgFdOck1gK7FLVsgJE7tTz0pQBczlBNUhBNk0MQH4UbnFSwjpQLMkLzgqvBBa+qGpLje16eTQ==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^3.0.2"
-
-"@types/react@18.3.3":
-  version "18.3.3"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.3.tgz#9679020895318b0915d7a3ab004d92d33375c45f"
-  integrity sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -3738,6 +3771,11 @@ react-hook-form@^7.53.0:
   version "7.53.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.53.0.tgz#3cf70951bf41fa95207b34486203ebefbd3a05ab"
   integrity sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==
+
+react-icons@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.3.0.tgz#ccad07a30aebd40a89f8cfa7d82e466019203f1c"
+  integrity sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==
 
 react-is@^16.13.1:
   version "16.13.1"

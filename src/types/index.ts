@@ -28,3 +28,16 @@ export interface IUser {
   premiumPostsPurchased: string[];
   isBlocked: boolean;
 }
+
+export interface IPost {
+  _id: string;
+  author: IUser;
+  title: string;
+  content: string;
+  category: string;
+  isPremium: number;
+  upvotes: string[];
+  downvotes: string[];
+  images: string[];
+  comments: { author: IUser; content: string }[];
+}

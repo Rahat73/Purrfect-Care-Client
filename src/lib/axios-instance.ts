@@ -1,11 +1,11 @@
 import envConfig from "@/src/config/env-config";
-// import { getNewAccessToken } from "@/src/services/auth-service";
 import axios from "axios";
 import { cookies } from "next/headers";
 
 const axiosInstance = axios.create({
   baseURL: envConfig.baseApi,
 });
+console.log(envConfig.baseApi);
 
 axiosInstance.interceptors.request.use(
   function (config) {
