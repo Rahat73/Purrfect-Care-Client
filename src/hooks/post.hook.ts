@@ -18,10 +18,16 @@ export const useGetAllPosts = (queryParams?: Record<string, any>) => {
 };
 
 export const useGetPostById = (postId: string) => {
-  const { data, isLoading, refetch, isSuccess } = useQuery({
+  const { data, isLoading, refetch, isSuccess, isFetching } = useQuery({
     queryKey: ["GET_POST_BY_ID", postId],
     queryFn: async () => await getPostById(postId),
   });
 
-  return { data: data?.data as IPost, isLoading, refetch, isSuccess };
+  return {
+    data: data?.data as IPost,
+    isLoading,
+    refetch,
+    isSuccess,
+    isFetching,
+  };
 };

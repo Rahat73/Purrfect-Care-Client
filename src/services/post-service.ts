@@ -1,8 +1,7 @@
 "use server";
 
-import axiosInstance from "../lib/axios-instance";
 import envConfig from "../config/env-config";
-import { IPost } from "../types";
+import axiosInstance from "../lib/axios-instance";
 
 // export const registerUser = async (userData: FieldValues) => {
 //   try {

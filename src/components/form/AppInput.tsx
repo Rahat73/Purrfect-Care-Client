@@ -13,6 +13,7 @@ export default function AppInput({
   type = "text",
   label,
   name,
+  placeholder,
 }: IInput) {
   const {
     register,
@@ -31,6 +32,7 @@ export default function AppInput({
       isClearable={clearable}
       type={type}
       label={label}
+      placeholder={placeholder}
     />
   );
 }

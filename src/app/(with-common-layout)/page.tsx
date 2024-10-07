@@ -6,7 +6,8 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
 
 export default function Home() {
-  const [page, setPage] = useState(1); // Track current page
+  // const [page, setPage] = useState(1); // Track current page
+  const [limit, setLimit] = useState(5);
   const [posts, setPosts] = useState<IPost[]>([]); // Store all posts
   const [loadingMore, setLoadingMore] = useState(false); // Track loading state
   const loadMoreRef = useRef<HTMLDivElement | null>(null); // Ref for load-more div
@@ -19,17 +20,17 @@ export default function Home() {
     isLoading: postLoading,
     isFetching,
   } = useGetAllPosts({
-    page,
-    limit: 5,
+    page: 1,
+    limit,
   });
 
   // When post data changes, append new posts to the list
-  useEffect(() => {
-    if (postData?.length) {
-      setPosts((prevPosts) => [...prevPosts, ...postData]);
-      setLoadingMore(false);
-    }
-  }, [postData]);
+  // useEffect(() => {
+  //   if (postData?.length) {
+  //     setPosts((prevPosts) => [...prevPosts, ...postData]);
+  //     setLoadingMore(false);
+  //   }
+  // }, [postData]);
 
   // Intersection Observer to detect when loadMoreRef comes into view
   const handleObserver = useCallback(
@@ -37,15 +38,15 @@ export default function Home() {
       const target = entries[0];
       if (
         target.isIntersecting &&
-        !postLoading &&
-        !loadingMore &&
-        page < meta.totalPage
+        // !postLoading &&
+        // !loadingMore &&
+        limit < meta.total
       ) {
-        setLoadingMore(true);
-        setPage((prevPage) => prevPage + 1);
+        // setLoadingMore(true);
+        setLimit((prevPage) => prevPage + 5);
       }
     },
-    [postLoading, loadingMore, page, meta.totalPage]
+    [postLoading, meta.total]
   );
 
   // Attach observer to the loadMoreRef element
@@ -68,7 +69,7 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <ul className="list-disc list-inside">
-        {posts.map((post: IPost) => (
+        {postData.map((post: IPost) => (
           <PostCard key={post._id} post={post} />
         ))}
       </ul>
@@ -77,12 +78,12 @@ export default function Home() {
       {isFetching && <p className="text-gray-500">Loading more posts...</p>}
 
       {/* Stop loading if we've reached the last page */}
-      {page >= meta.totalPage && (
+      {limit >= meta.total && (
         <p className="text-gray-500">No more posts to load.</p>
       )}
 
       {/* Load more ref for infinite scroll */}
-      {page < meta.totalPage && <div ref={loadMoreRef} className="h-10"></div>}
+      {limit < meta.total && <div ref={loadMoreRef} className="h-10"></div>}
     </section>
   );
 }

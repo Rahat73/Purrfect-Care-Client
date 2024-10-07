@@ -31,11 +31,14 @@ export default function AppForm({
 
   const methods = useForm(formConfig);
 
-  const submitHandler = methods.handleSubmit;
+  const submitHandler = methods.handleSubmit((data) => {
+    onSubmit(data);
+    methods.reset();
+  });
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={submitHandler(onSubmit)}>{children}</form>
+      <form onSubmit={submitHandler}>{children}</form>
     </FormProvider>
   );
 }

@@ -13,6 +13,7 @@ export interface IInput {
   name: string;
   disabled?: boolean;
   clearable?: boolean;
+  placeholder?: string;
 }
 
 export interface IUser {
