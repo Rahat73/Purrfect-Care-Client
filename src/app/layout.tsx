@@ -1,9 +1,8 @@
 import "@/src/styles/globals.css";
-import { Metadata, Viewport } from "next";
-import { Link } from "@nextui-org/link";
 import clsx from "clsx";
-import { siteConfig } from "../config/site";
+import { Metadata, Viewport } from "next";
 import { fontSans } from "../config/fonts";
+import { siteConfig } from "../config/site";
 import { Providers } from "../lib/providers";
 
 export const metadata: Metadata = {

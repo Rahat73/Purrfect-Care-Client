@@ -3,20 +3,15 @@
 import envConfig from "../config/env-config";
 import axiosInstance from "../lib/axios-instance";
 
-// export const registerUser = async (userData: FieldValues) => {
-//   try {
-//     const { data } = await axiosInstance.post("/auth/signup", userData);
+export const createPost = async (postData: Record<string, any>) => {
+  try {
+    const { data } = await axiosInstance.post("/posts", postData);
 
-//     if (data.success) {
-//       cookies().set("accessToken", data?.accessToken);
-//       // cookies().set("refreshToken", data?.data?.refreshToken);
-//     }
-
-//     return data;
-//   } catch (error: any) {
-//     throw new Error(error);
-//   }
-// };
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
 
 export const getAllPosts = async (queryParams?: Record<string, any>) => {
   try {

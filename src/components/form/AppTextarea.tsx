@@ -6,20 +6,20 @@ export default function AppTextarea({
   name,
   label,
   variant = "bordered",
+  placeholder,
 }: IInput) {
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
-  const currentValue = useWatch({ name });
   return (
     <Textarea
       {...register(name)}
       label={label}
       minRows={6}
       variant={variant}
-      value={currentValue || ""}
+      placeholder={placeholder}
     />
   );
 }

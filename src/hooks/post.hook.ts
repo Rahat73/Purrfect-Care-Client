@@ -1,6 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
-import { getAllPosts, getPostById } from "../services/post-service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createPost, getAllPosts, getPostById } from "../services/post-service";
 import { IPost } from "../types";
+import { toast } from "sonner";
+
+export const useCreatePost = ({
+  invalidateQueries,
+}: {
+  invalidateQueries: string[];
+}) => {
+  const queryClient = useQueryClient();
+  return useMutation<any, Error, Record<string, any>>({
+    mutationKey: ["CREATE_POST"],
+    mutationFn: async (postData) => await createPost(postData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: invalidateQueries });
+      toast.success("Post created successfully");
+    },
+    onError: (error: any) => {
+      toast.error(error.message);
+    },
+  });
+};
 
 export const useGetAllPosts = (queryParams?: Record<string, any>) => {
   const { data, isLoading, refetch, isSuccess, isFetching } = useQuery({

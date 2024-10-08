@@ -35,14 +35,18 @@ export default function WithCommonLayout({
       <div className="max-w-screen-2xl mx-auto grid grid-cols-4">
         {/* Left Sidebar */}
         <div className="col-span-1">
-          <LeftSidebar />
+          <div className="ml-4 fixed top-1/2 -translate-y-1/2 left-0">
+            <LeftSidebar />
+          </div>
         </div>
         {/* Main Content (Posts) */}
         <main className="flex-grow p-4 col-span-2">{children}</main>
 
         {/* Right Sidebar */}
         <div className="col-span-1">
-          <RightSidebar />
+          <div className="ml-4 fixed top-1/2 -translate-y-1/2 right-0">
+            <RightSidebar />
+          </div>
         </div>
       </div>
     </div>

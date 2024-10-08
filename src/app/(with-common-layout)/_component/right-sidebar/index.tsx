@@ -1,39 +1,73 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import { FaCrown } from "react-icons/fa6"; // FontAwesome Icon for Premium Posts
 
 const RightSidebar = () => {
   return (
-    <aside className="p-4 border-l border-gray-200  h-screen">
-      {/* Add content for the right sidebar here */}
-      <div className="fixed top-1/2 -translate-y-1/2">
-        <div>
-          <h2 className="font-semibold text-lg">Trending Posts</h2>
-          <ul className="space-y-2">
-            {/* Example items, replace with dynamic data */}
+    <aside className="p-10 bg-transparent text-default-600">
+      <div>
+        {/* Post Categories Section */}
+        <div className="mb-6">
+          <h2 className="font-semibold text-lg">Categories</h2>
+          <ul className="space-y-2 mt-2">
             <li>
-              <Link href="/post/1">Post Title 1</Link>
+              <Link href="/category/tip" className=" transition-all">
+                Tip
+              </Link>
             </li>
             <li>
-              <Link href="/post/2">Post Title 2</Link>
-            </li>
-            <li>
-              <Link href="/post/3">Post Title 3</Link>
+              <Link href="/category/story" className=" transition-all">
+                Story
+              </Link>
             </li>
           </ul>
         </div>
 
-        <div className="mt-6">
-          <h2 className="font-semibold text-lg">Suggested Users</h2>
-          <ul className="space-y-2">
+        {/* Premium Posts Section */}
+        <div className="mb-6">
+          <h2 className="font-semibold text-lg flex items-center">
+            Premium Posts <FaCrown className="ml-2 text-yellow-500" />
+          </h2>
+          <ul className="space-y-2 mt-2">
             {/* Example items, replace with dynamic data */}
             <li>
-              <Link href="/profile/1">User 1</Link>
+              <Link href="/post/premium/1" className=" transition-all">
+                Premium Post 1
+              </Link>
             </li>
             <li>
-              <Link href="/profile/2">User 2</Link>
+              <Link href="/post/premium/2" className=" transition-all">
+                Premium Post 2
+              </Link>
             </li>
             <li>
-              <Link href="/profile/3">User 3</Link>
+              <Link href="/post/premium/3" className=" transition-all">
+                Premium Post 3
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Suggested Users Section */}
+        <div className="mb-6">
+          <h2 className="font-semibold text-lg ">Suggested Users</h2>
+          <ul className="space-y-2 mt-2">
+            {/* Example items, replace with dynamic data */}
+            <li>
+              <Link href="/profile/1" className=" transition-all">
+                User 1
+              </Link>
+            </li>
+            <li>
+              <Link href="/profile/2" className=" transition-all">
+                User 2
+              </Link>
+            </li>
+            <li>
+              <Link href="/profile/3" className=" transition-all">
+                User 3
+              </Link>
             </li>
           </ul>
         </div>

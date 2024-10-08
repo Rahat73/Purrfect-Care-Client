@@ -2,6 +2,8 @@
 
 import AppForm from "@/src/components/form/AppForm";
 import AppInput from "@/src/components/form/AppInput";
+import AppTextarea from "@/src/components/form/AppTextarea";
+import HtmlContentRenderer from "@/src/components/html-content-render";
 import PostDetailsLoading from "@/src/components/ui/post-details-loading";
 import { useFollowUser } from "@/src/hooks/follow.hook";
 import { useAddComment, useVotePost } from "@/src/hooks/post-action.hook";
@@ -17,6 +19,7 @@ import { Spacer } from "@nextui-org/spacer";
 import { Tooltip } from "@nextui-org/tooltip";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import {
+  FaPaperPlane,
   FaRegCommentDots,
   FaRegThumbsDown,
   FaRegThumbsUp,
@@ -122,7 +125,9 @@ const PostDetailsPage = ({ params }: { params: { postId: string } }) => {
         {/* Body: Post Content */}
         <CardBody className="px-3 py-0 text-default-600">
           <h2 className="text-2xl font-bold mb-2">{postData?.title}</h2>
-          <p className="text-base mb-4">{postData?.content}</p>
+          <p className="text-base mb-4">
+            <HtmlContentRenderer content={postData?.content} />
+          </p>
           <Spacer y={4} />
           <span className="text-xs text-default-500">
             Category: {postData?.category}
@@ -246,7 +251,7 @@ const PostDetailsPage = ({ params }: { params: { postId: string } }) => {
             resolver={zodResolver(addCommentValidationSchema)}
           >
             <div className="">
-              <AppInput
+              <AppTextarea
                 name="content"
                 label=""
                 type="text"
@@ -254,12 +259,12 @@ const PostDetailsPage = ({ params }: { params: { postId: string } }) => {
               />
             </div>
             <Button
-              className="my-3 w-full rounded-md bg-default-900 font-semibold text-default"
+              className="my-3 w-40 rounded-md bg-default-900 font-semibold text-default"
               size="lg"
               type="submit"
               isLoading={addCommentPending}
             >
-              Add Comment
+              <FaPaperPlane /> Comment
             </Button>
           </AppForm>
         </div>

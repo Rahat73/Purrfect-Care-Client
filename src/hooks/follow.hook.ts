@@ -13,7 +13,7 @@ export const useFollowUser = ({
     mutationFn: async (postData) => await followUser(postData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: invalidateQueries });
-      toast.success("Following user successfully");
+      //   toast.success("Following user successfully");
     },
     onError: (error: any) => {
       toast.error(error.message);

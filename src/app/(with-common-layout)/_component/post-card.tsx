@@ -1,5 +1,6 @@
 "use client";
 
+import HtmlContentRenderer from "@/src/components/html-content-render";
 import { useUser } from "@/src/context/user.provider";
 import { useFollowUser } from "@/src/hooks/follow.hook";
 import { useVotePost } from "@/src/hooks/post-action.hook";
@@ -110,7 +111,8 @@ export default function PostCard({ post }: { post: IPost }) {
         <p className="pt-2">
           {post.content.length > 100 && !seeMoreClicked ? (
             <>
-              {post.content.slice(0, 100)}...{" "}
+              <HtmlContentRenderer content={post.content.slice(0, 100)} />
+              ...{" "}
               <span
                 className="text-default-500 cursor-pointer"
                 onClick={() => setSeeMoreClicked(true)}
@@ -119,7 +121,7 @@ export default function PostCard({ post }: { post: IPost }) {
               </span>
             </>
           ) : (
-            post.content
+            <HtmlContentRenderer content={post.content} />
           )}
         </p>
         <Spacer y={4} />
