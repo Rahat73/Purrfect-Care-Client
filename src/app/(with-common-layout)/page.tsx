@@ -1,89 +1,83 @@
 "use client";
 
-import PostCard from "./_component/post-card";
-import { IPost } from "@/src/types";
-import { useEffect, useState, useRef, useCallback } from "react";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
+import { IPost } from "@/src/types";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import PostCard from "./_component/post-card";
 
-export default function Home() {
-  // const [page, setPage] = useState(1); // Track current page
-  const [limit, setLimit] = useState(5);
-  const [posts, setPosts] = useState<IPost[]>([]); // Store all posts
-  const [loadingMore, setLoadingMore] = useState(false); // Track loading state
-  const loadMoreRef = useRef<HTMLDivElement | null>(null); // Ref for load-more div
+export default function Home({
+  searchParams,
+}: {
+  searchParams: Record<string, string>;
+}) {
+  const { category } = searchParams;
 
+  // Pagination states
+  const [page, setPage] = useState(1);
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+
+  // Fetch posts with pagination
   const {
-    data: { result: postData, meta } = {
+    data: { result: postData = [], meta } = {
       result: [],
-      meta: { page: 1, totalPage: 1 },
+      meta: { page: 1, totalPage: 100, limit: 5, total: 0 },
     },
-    isLoading: postLoading,
-    isFetching,
+    isFetching: postLoading,
   } = useGetAllPosts({
-    page: 1,
-    limit,
+    page,
+    limit: 5,
+    category,
+    sort: category && "-upvotes", // Sort by upvotes if category is set
   });
 
-  // When post data changes, append new posts to the list
-  // useEffect(() => {
-  //   if (postData?.length) {
-  //     setPosts((prevPosts) => [...prevPosts, ...postData]);
-  //     setLoadingMore(false);
-  //   }
-  // }, [postData]);
-
-  // Intersection Observer to detect when loadMoreRef comes into view
-  const handleObserver = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      const target = entries[0];
-      if (
-        target.isIntersecting &&
-        // !postLoading &&
-        // !loadingMore &&
-        limit < meta.total
-      ) {
-        // setLoadingMore(true);
-        setLimit((prevPage) => prevPage + 5);
-      }
-    },
-    [postLoading, meta.total]
-  );
-
-  // Attach observer to the loadMoreRef element
+  // Reset posts when category changes
   useEffect(() => {
-    const observer = new IntersectionObserver(handleObserver, {
-      rootMargin: "200px", // Trigger when user is 200px near the bottom
-    });
+    setPage(1);
+    setPosts([]); // Clear posts on category change
+    setHasMore(true); // Reset hasMore flag
+  }, [category]);
 
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+  // Update posts when new data is fetched
+  useEffect(() => {
+    if (postData.length > 0) {
+      setPosts((prevPosts) => {
+        const newPosts = postData.filter(
+          (newPost: IPost) =>
+            !prevPosts.some((prevPost) => prevPost._id === newPost._id)
+        );
+        return [...prevPosts, ...newPosts];
+      });
+      setHasMore(page < meta.totalPage); // Check if there are more pages
     }
+  }, [postData]); // Only depend on postData
 
-    return () => {
-      if (loadMoreRef.current) {
-        observer.unobserve(loadMoreRef.current);
-      }
-    };
-  }, [handleObserver]);
+  // Function to fetch the next page
+  const fetchMorePosts = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <ul className="list-disc list-inside">
-        {postData.map((post: IPost) => (
-          <PostCard key={post._id} post={post} />
-        ))}
-      </ul>
-
-      {/* Loader Message */}
-      {isFetching && <p className="text-gray-500">Loading more posts...</p>}
-
-      {/* Stop loading if we've reached the last page */}
-      {limit >= meta.total && (
-        <p className="text-gray-500">No more posts to load.</p>
+      {postLoading && posts.length === 0 ? (
+        <p>Loading posts...</p>
+      ) : (
+        <InfiniteScroll
+          dataLength={posts.length}
+          next={fetchMorePosts}
+          hasMore={hasMore}
+          loader={<h4>Loading more posts...</h4>}
+          endMessage={<p>No more posts to load.</p>}
+          scrollThreshold={0.9}
+        >
+          <ul className="list-disc list-inside">
+            {posts.map((post: IPost) => (
+              <PostCard key={post._id} post={post} />
+            ))}
+          </ul>
+        </InfiniteScroll>
       )}
-
-      {/* Load more ref for infinite scroll */}
-      {limit < meta.total && <div ref={loadMoreRef} className="h-10"></div>}
     </section>
   );
 }

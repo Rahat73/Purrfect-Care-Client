@@ -45,6 +45,7 @@ const PostDetailsPage = ({ params }: { params: { postId: string } }) => {
     isSuccess: upvoteSuccess,
   } = useVotePost({
     invalidateQueries: ["GET_POST_BY_ID", params.postId],
+    onSuccess: () => {},
   });
 
   const {
@@ -53,6 +54,7 @@ const PostDetailsPage = ({ params }: { params: { postId: string } }) => {
     isSuccess: downvoteSuccess,
   } = useVotePost({
     invalidateQueries: ["GET_POST_BY_ID", params.postId],
+    onSuccess: () => {},
   });
 
   const {

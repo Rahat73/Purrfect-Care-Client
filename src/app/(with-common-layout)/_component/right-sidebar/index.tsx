@@ -12,13 +12,18 @@ const RightSidebar = () => {
           <h2 className="font-semibold text-lg">Categories</h2>
           <ul className="space-y-2 mt-2">
             <li>
-              <Link href="/category/tip" className=" transition-all">
+              <Link href="/?category=Tip" className=" transition-all">
                 Tip
               </Link>
             </li>
             <li>
-              <Link href="/category/story" className=" transition-all">
+              <Link href="/?category=Story" className=" transition-all">
                 Story
+              </Link>
+            </li>
+            <li>
+              <Link href="/" className=" transition-all">
+                All
               </Link>
             </li>
           </ul>

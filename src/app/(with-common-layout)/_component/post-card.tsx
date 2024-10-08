@@ -13,6 +13,7 @@ import { Image } from "@nextui-org/image";
 import { Spacer } from "@nextui-org/spacer";
 import { Tooltip } from "@nextui-org/tooltip";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   FaRegCommentDots,
@@ -27,27 +28,58 @@ export default function PostCard({ post }: { post: IPost }) {
   const { data: user } = useUserInfo();
   const { user: loggedinUser } = useUser();
 
-  const {
-    mutate: handleFollowUser,
-    isPending,
-    isSuccess,
-  } = useFollowUser({ invalidateQueries: ["GET_USER_INFO"] });
-  const {
-    mutate: handleUpvotePost,
-    isPending: upvotePending,
-    isSuccess: upvoteSuccess,
-  } = useVotePost({ invalidateQueries: ["GET_ALL_POST"] });
+  const router = useRouter();
 
-  const {
-    mutate: handleDownvotePost,
-    isPending: downvotePending,
-    isSuccess: downvoteSuccess,
-  } = useVotePost({ invalidateQueries: ["GET_ALL_POST"] });
-
+  const [localPost, setLocalPost] = useState(post); // Local state to track post data
   const [seeMoreClicked, setSeeMoreClicked] = useState(false);
 
+  const { mutate: handleFollowUser, isPending } = useFollowUser({
+    invalidateQueries: ["GET_USER_INFO"],
+  });
+
+  const { mutate: handleUpvotePost, isPending: upvotePending } = useVotePost({
+    invalidateQueries: ["GET_ALL_POST"],
+    onSuccess: () => {
+      if (localPost.upvotes.includes(user!._id)) {
+        setLocalPost((prevPost) => ({
+          ...prevPost,
+          upvotes: prevPost.upvotes.filter((id) => id !== user!._id),
+        }));
+      } else {
+        setLocalPost((prevPost) => ({
+          ...prevPost,
+          upvotes: [...prevPost.upvotes, user!._id],
+          downvotes: prevPost.downvotes.filter((id) => id !== user!._id),
+        }));
+      }
+    },
+  });
+
+  const { mutate: handleDownvotePost, isPending: downvotePending } =
+    useVotePost({
+      invalidateQueries: ["GET_ALL_POST"],
+      onSuccess: () => {
+        if (localPost.downvotes.includes(user!._id)) {
+          setLocalPost((prevPost) => ({
+            ...prevPost,
+            downvotes: prevPost.downvotes.filter((id) => id !== user!._id),
+          }));
+        } else {
+          setLocalPost((prevPost) => ({
+            ...prevPost,
+            downvotes: [...prevPost.downvotes, user!._id],
+            upvotes: prevPost.upvotes.filter((id) => id !== user!._id),
+          }));
+        }
+      },
+    });
+
   return (
-    <Card className="w-11/12 lg:w-[600px] mx-auto my-4">
+    <Card
+      className="w-11/12 lg:w-[600px] mx-auto my-4"
+      isPressable
+      onPress={() => router.push(`/posts/${localPost._id}`)}
+    >
       {/* Header: Author Info */}
       <CardHeader className="justify-between">
         <div className="flex gap-5">
@@ -55,63 +87,52 @@ export default function PostCard({ post }: { post: IPost }) {
             isBordered
             radius="full"
             size="md"
-            src={post.author.profilePicture}
+            src={localPost.author.profilePicture}
           />
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-small font-semibold leading-none text-default-600">
-              {post.author.name}
+              {localPost.author.name}
             </h4>
             <h5 className="text-small tracking-tight text-default-400">
-              {post.author.email}
+              {localPost.author.email}
             </h5>
           </div>
         </div>
-        {loggedinUser ? (
-          user?._id !== post.author._id && (
-            <Button
-              className={
-                user?.following?.includes(post.author._id)
-                  ? "bg-transparent text-foreground border-default-200"
-                  : ""
-              }
-              color="primary"
-              radius="full"
-              size="sm"
-              variant={
-                user?.following?.includes(post.author._id)
-                  ? "bordered"
-                  : "solid"
-              }
-              onPress={() => handleFollowUser({ followingId: post.author._id })}
-              isDisabled={!user}
-              isLoading={isPending}
-            >
-              {user?.following?.includes(post.author._id)
-                ? "Unfollow"
-                : "Follow"}
-            </Button>
-          )
-        ) : (
+        {loggedinUser && user?._id !== localPost.author._id && (
           <Button
-            className=""
+            className={
+              user?.following?.includes(localPost.author._id)
+                ? "bg-transparent text-foreground border-default-200"
+                : ""
+            }
             color="primary"
             radius="full"
             size="sm"
-            variant="solid"
-            onPress={() => toast.error("Please login to follow user.")}
+            variant={
+              user?.following?.includes(localPost.author._id)
+                ? "bordered"
+                : "solid"
+            }
+            onPress={() =>
+              handleFollowUser({ followingId: localPost.author._id })
+            }
+            isDisabled={!user}
+            isLoading={isPending}
           >
-            Follow
+            {user?.following?.includes(localPost.author._id)
+              ? "Unfollow"
+              : "Follow"}
           </Button>
         )}
       </CardHeader>
 
       {/* Body: Post Content */}
       <CardBody className="px-3 py-0 text-small text-default-600">
-        <h4 className="text-lg font-bold">{post.title}</h4>
+        <h4 className="text-lg font-bold">{localPost.title}</h4>
         <p className="pt-2">
-          {post.content.length > 100 && !seeMoreClicked ? (
+          {localPost.content.length > 100 && !seeMoreClicked ? (
             <>
-              <HtmlContentRenderer content={post.content.slice(0, 100)} />
+              <HtmlContentRenderer content={localPost.content.slice(0, 100)} />
               ...{" "}
               <span
                 className="text-default-500 cursor-pointer"
@@ -121,18 +142,18 @@ export default function PostCard({ post }: { post: IPost }) {
               </span>
             </>
           ) : (
-            <HtmlContentRenderer content={post.content} />
+            <HtmlContentRenderer content={localPost.content} />
           )}
         </p>
         <Spacer y={4} />
         <span className="text-xs text-default-500">
-          Category: {post.category}
+          Category: {localPost.category}
         </span>
         {/* Post Images */}
         <Spacer y={4} />
-        {post.images.length > 0 && (
+        {localPost.images.length > 0 && (
           <div className="flex gap-3">
-            {post.images.map((image, index) => (
+            {localPost.images.map((image, index) => (
               <Image
                 isBlurred
                 isZoomed
@@ -155,24 +176,24 @@ export default function PostCard({ post }: { post: IPost }) {
             <Button
               variant="shadow"
               size="sm"
-              isLoading={upvotePending}
               onPress={() =>
                 handleUpvotePost({
-                  postId: post._id,
+                  postId: localPost._id,
                   postData: { voteType: "upvote" },
                 })
               }
+              isLoading={upvotePending}
             >
               <div className="flex gap-2 items-center">
                 <p className="text-default-400 text-small">
-                  {post.upvotes.includes(user?._id) ? (
+                  {localPost.upvotes.includes(user?._id) ? (
                     <FaThumbsUp className="text-xl cursor-pointer text-primary" />
                   ) : (
                     <FaRegThumbsUp className="text-xl cursor-pointer" />
                   )}
                 </p>
                 <p className="font-semibold text-default-400 text-small">
-                  {post.upvotes.length}
+                  {localPost.upvotes.length}
                 </p>
               </div>
             </Button>
@@ -181,24 +202,24 @@ export default function PostCard({ post }: { post: IPost }) {
             <Button
               variant="shadow"
               size="sm"
-              isLoading={downvotePending}
               onPress={() =>
                 handleDownvotePost({
-                  postId: post._id,
+                  postId: localPost._id,
                   postData: { voteType: "downvote" },
                 })
               }
+              isLoading={downvotePending}
             >
               <div className="flex gap-2 items-center">
                 <p className="text-default-400 text-small">
-                  {post.downvotes.includes(user?._id) ? (
+                  {localPost.downvotes.includes(user?._id) ? (
                     <FaThumbsDown className="text-xl cursor-pointer text-primary" />
                   ) : (
                     <FaRegThumbsDown className="text-xl cursor-pointer" />
                   )}
                 </p>
                 <p className="font-semibold text-default-400 text-small">
-                  {post.downvotes.length}
+                  {localPost.downvotes.length}
                 </p>
               </div>
             </Button>
@@ -207,14 +228,14 @@ export default function PostCard({ post }: { post: IPost }) {
             <Button variant="shadow" size="sm">
               <div className="flex gap-2 items-center">
                 <Link
-                  href={`/posts/${post._id}`}
+                  href={`/posts/${localPost._id}`}
                   className="text-default-400 text-small"
                 >
                   <FaRegCommentDots className="text-xl cursor-pointer" />
                 </Link>
 
                 <p className="font-semibold text-default-400 text-small">
-                  {post.comments.length}
+                  {localPost.comments.length}
                 </p>
               </div>
             </Button>

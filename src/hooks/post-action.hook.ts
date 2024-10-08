@@ -11,8 +11,10 @@ interface IProps {
 
 export const useVotePost = ({
   invalidateQueries,
+  onSuccess,
 }: {
   invalidateQueries: string[];
+  onSuccess: () => void;
 }) => {
   const queryClient = useQueryClient();
   return useMutation<any, Error, any>({
@@ -21,6 +23,7 @@ export const useVotePost = ({
       await votePost(postId, postData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: invalidateQueries });
+      onSuccess();
       //   toast.success("Voted successfully");
     },
     onError: (error: any) => {
