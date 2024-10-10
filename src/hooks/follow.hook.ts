@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { followUser } from "../services/follow-service";
+import { followUser, getFollow } from "../services/follow-service";
 
 export const useFollowUser = ({
   invalidateQueries,
@@ -19,4 +19,19 @@ export const useFollowUser = ({
       toast.error(error.message);
     },
   });
+};
+
+export const useGetFollow = () => {
+  const { data, isLoading, refetch, isSuccess, isFetching } = useQuery({
+    queryKey: ["GET_FOLLOW"],
+    queryFn: async () => await getFollow(),
+  });
+
+  return {
+    data: data?.data,
+    isLoading,
+    refetch,
+    isSuccess,
+    isFetching,
+  };
 };

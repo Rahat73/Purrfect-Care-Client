@@ -8,7 +8,7 @@ type Role = keyof typeof roleBasedRoutes;
 
 const roleBasedRoutes = {
   user: [/^\/profile/, /^\/user/, /^\/posts/],
-  admin: [/^\/admin/, /^\/posts/],
+  admin: [/^\/profile/, /^\/admin/, /^\/user/, /^\/posts/],
 };
 
 // This function can be marked `async` if using `await` inside
@@ -49,8 +49,12 @@ export const config = {
     "/profile",
     "/profile/:page*",
     "/admin",
+    "/admin/:page*",
+    "/user",
+    "/user/:page*",
     "/login",
     "/register",
+    "/posts",
     "/posts/:page*",
   ],
 };

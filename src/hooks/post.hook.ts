@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createPost, getAllPosts, getPostById } from "../services/post-service";
+import {
+  createPost,
+  getAllPosts,
+  getMyPosts,
+  getPostById,
+} from "../services/post-service";
 import { IPost } from "../types";
 import { toast } from "sonner";
 
@@ -45,6 +50,21 @@ export const useGetPostById = (postId: string) => {
 
   return {
     data: data?.data as IPost,
+    isLoading,
+    refetch,
+    isSuccess,
+    isFetching,
+  };
+};
+
+export const useGetMyPosts = () => {
+  const { data, isLoading, refetch, isSuccess, isFetching } = useQuery({
+    queryKey: ["GET_MY_POSTS"],
+    queryFn: async () => await getMyPosts(),
+  });
+
+  return {
+    data: data?.data,
     isLoading,
     refetch,
     isSuccess,

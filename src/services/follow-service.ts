@@ -10,3 +10,12 @@ export const followUser = async (postData: { followingId: string }) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const getFollow = async () => {
+  try {
+    const { data } = await axiosInstance.get("/follow/me");
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};

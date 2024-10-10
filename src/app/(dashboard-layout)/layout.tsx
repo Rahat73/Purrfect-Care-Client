@@ -1,9 +1,8 @@
 import { Navbar } from "@/src/components/navbar";
+import { siteConfig } from "@/src/config/site";
 import "@/src/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { siteConfig } from "../../config/site";
-import LeftSidebar from "./_component/left-sidebar";
-import RightSidebar from "./_component/right-sidebar";
+import LeftSidebar from "../(with-common-layout)/_component/left-sidebar";
 
 export const metadata: Metadata = {
   title: {
@@ -23,7 +22,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function WithCommonLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -31,7 +30,7 @@ export default function WithCommonLayout({
   return (
     <div className="">
       <Navbar />
-      <div className="max-w-screen-2xl mx-auto grid grid-cols-4">
+      <div className="max-w-screen-2xl mx-auto grid grid-cols-4 ">
         {/* Left Sidebar */}
         <div className="col-span-1">
           <div className="ml-4 fixed top-1/2 -translate-y-1/2 left-0">
@@ -39,14 +38,9 @@ export default function WithCommonLayout({
           </div>
         </div>
         {/* Main Content (Posts) */}
-        <main className="flex-grow p-4 col-span-2">{children}</main>
-
-        {/* Right Sidebar */}
-        <div className="col-span-1">
-          <div className="ml-4 fixed top-1/2 -translate-y-1/2 right-0">
-            <RightSidebar />
-          </div>
-        </div>
+        <main className="flex-grow p-4 col-span-3 bg-default-50 m-5 mr-16 rounded-lg min-h-[80vh]">
+          {children}
+        </main>
       </div>
     </div>
   );

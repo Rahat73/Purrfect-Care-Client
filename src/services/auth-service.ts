@@ -16,27 +16,38 @@ export const registerUser = async (userData: FieldValues) => {
 
     return data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.response.data.message);
   }
 };
 
 export const loginUser = async (userData: FieldValues) => {
   try {
     const { data } = await axiosInstance.post("/auth/login", userData);
-    console.log(data);
     if (data.success) {
       cookies().set("accessToken", data?.accessToken);
       // cookies().set("refreshToken", data?.data?.refreshToken);
     }
     return data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.response.data.message);
   }
 };
 
 export const logout = () => {
   cookies().delete("accessToken");
   // cookies().delete("refreshToken");
+};
+
+export const changePassword = async (passwordData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/auth/change-password",
+      passwordData
+    );
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
 };
 
 export const getCurrentUser = async () => {

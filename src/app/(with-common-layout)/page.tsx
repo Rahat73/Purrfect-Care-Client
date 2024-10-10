@@ -5,6 +5,7 @@ import { IPost } from "@/src/types";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import PostCard from "./_component/post-card";
+import PostCardLoading from "@/src/components/ui/post-card-loading";
 
 export default function Home({
   searchParams,
@@ -61,7 +62,7 @@ export default function Home({
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       {postLoading && posts.length === 0 ? (
-        <p>Loading posts...</p>
+        Array.from({ length: 6 }).map((_, i) => <PostCardLoading key={i} />)
       ) : (
         <InfiniteScroll
           dataLength={posts.length}

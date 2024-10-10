@@ -12,12 +12,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { logout } from "../services/auth-service";
 import { protectedRoutes } from "../constant";
 import { useUser } from "../context/user.provider";
+import { useUserInfo } from "../hooks/user.hook";
 
 export default function NavbarDropdown() {
   const router = useRouter();
   const pathname = usePathname();
 
   const { user, setIsLoading: userLoading } = useUser();
+  const { data } = useUserInfo();
 
   const handleLogout = () => {
     logout();
@@ -35,7 +37,7 @@ export default function NavbarDropdown() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Avatar className="cursor-pointer" src={user?.profilePicture} />
+        <Avatar className="cursor-pointer" src={data?.profilePicture} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem onClick={() => handleNavigation("/profile")}>

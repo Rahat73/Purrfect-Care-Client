@@ -1,30 +1,38 @@
 "use client";
 
+import { useUser } from "@/src/context/user.provider";
 import { Card } from "@nextui-org/card";
 import { Tooltip } from "@nextui-org/tooltip";
 import Link from "next/link";
 import { useState } from "react";
 import {
-  FaBars,
-  FaBookmark,
-  FaHeart,
   FaHouse,
   FaMagnifyingGlass,
   FaPlus,
   FaUser,
+  FaTableList,
+  FaUserShield,
 } from "react-icons/fa6"; // Using FontAwesome icons
 
 export default function LeftSidebar() {
   const [activeMenu, setActiveMenu] = useState("home");
+  const { user } = useUser();
 
   const menuItems = [
     { label: "HOME", icon: FaHouse, href: "/" },
     { label: "SEARCH", icon: FaMagnifyingGlass, href: "/search" },
     { label: "CREATE POST", icon: FaPlus, href: "/posts/create-post" },
-    { label: "FAVORITES", icon: FaHeart, href: "/favorites" },
     { label: "PROFILE", icon: FaUser, href: "/profile" },
-    { label: "SAVED", icon: FaBookmark, href: "/saved" },
-    { label: "MORE", icon: FaBars, href: "/more" },
+    { label: "DASHBOARD", icon: FaTableList, href: `/user/dashboard` },
+    ...(user?.role === "admin"
+      ? [
+          {
+            label: "ADMIN DASHBOARD",
+            icon: FaUserShield,
+            href: "/admin/dashboard",
+          },
+        ]
+      : []),
   ];
 
   return (

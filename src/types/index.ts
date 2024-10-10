@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import { ReactNode, SVGProps } from "react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -14,6 +14,8 @@ export interface IInput {
   disabled?: boolean;
   clearable?: boolean;
   placeholder?: string;
+  defaultValue?: string;
+  endContent?: ReactNode;
 }
 
 export interface IUser {
@@ -24,8 +26,8 @@ export interface IUser {
   role: "user" | "admin";
   profilePicture?: string;
   bio?: string;
-  followers: string;
-  following: string;
+  followers: string[];
+  following: string[];
   premiumPostsPurchased: string[];
   isBlocked: boolean;
 }
@@ -41,4 +43,7 @@ export interface IPost {
   downvotes: string[];
   images: string[];
   comments: { author: IUser; content: string }[];
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

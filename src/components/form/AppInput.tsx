@@ -14,6 +14,8 @@ export default function AppInput({
   label,
   name,
   placeholder,
+  defaultValue,
+  endContent,
 }: IInput) {
   const {
     register,
@@ -33,6 +35,8 @@ export default function AppInput({
       type={type}
       label={label}
       placeholder={placeholder}
+      defaultValue={defaultValue}
+      endContent={endContent}
     />
   );
 }
