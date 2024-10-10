@@ -41,3 +41,14 @@ export const getMyPosts = async () => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const changePostVisibilty = async (postId: string) => {
+  try {
+    const { data } = await axiosInstance.put(
+      `/posts/change-visibility/${postId}`
+    );
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};

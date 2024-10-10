@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  changePostVisibilty,
   createPost,
   getAllPosts,
   getMyPosts,
@@ -70,4 +71,18 @@ export const useGetMyPosts = () => {
     isSuccess,
     isFetching,
   };
+};
+
+export const useChangePostVisibilty = () => {
+  const queryClient = useQueryClient();
+  return useMutation<any, Error, string>({
+    mutationKey: ["CHANGE_POST_VISIBILITY"],
+    mutationFn: async (postId) => await changePostVisibilty(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
+    },
+    onError: (error: any) => {
+      toast.error(error.message);
+    },
+  });
 };

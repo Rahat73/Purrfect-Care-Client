@@ -5,6 +5,7 @@ import { Tab, Tabs } from "@nextui-org/tabs";
 import { BsFilePostFill } from "react-icons/bs";
 import { FaDollarSign, FaUsers } from "react-icons/fa6";
 import Contents from "./_component/contents/contents";
+import Users from "./_component/users/users";
 
 const AdminDashboard = () => {
   return (
@@ -34,14 +35,7 @@ const AdminDashboard = () => {
               </div>
             }
           >
-            <Card>
-              <CardBody>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur.
-              </CardBody>
-            </Card>
+            <Users />
           </Tab>
           <Tab
             key="Payments"

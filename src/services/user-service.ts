@@ -22,3 +22,30 @@ export const updateProfile = async (updateData: FieldValues) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const getAllUsers = async () => {
+  try {
+    const { data } = await axiosInstance.get("/users");
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const makeAdmin = async (userId: string) => {
+  try {
+    const { data } = await axiosInstance.put(`/users/make-admin/${userId}`);
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const blockUser = async (userId: string) => {
+  try {
+    const { data } = await axiosInstance.put(`/users/block/${userId}`);
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};

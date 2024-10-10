@@ -31,6 +31,7 @@ export default function Home({
     limit: 5,
     category,
     sort: category && "-upvotes", // Sort by upvotes if category is set
+    isPublished: true,
   });
 
   // Reset posts when category changes

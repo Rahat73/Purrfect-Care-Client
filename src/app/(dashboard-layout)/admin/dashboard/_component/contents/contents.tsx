@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllPosts } from "@/src/hooks/post.hook";
+import { useChangePostVisibilty, useGetAllPosts } from "@/src/hooks/post.hook";
 import { IPost } from "@/src/types";
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
@@ -15,7 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { Tooltip } from "@nextui-org/tooltip";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -46,6 +45,8 @@ const Contents = () => {
 
   const router = useRouter();
 
+  const { mutate: changePostVisibilty, isPending } = useChangePostVisibilty();
+
   const columns = [
     { key: "title", label: "Post Title" },
     { key: "author", label: "Author" },
@@ -72,18 +73,13 @@ const Contents = () => {
     createdAt: new Date(post.createdAt).toLocaleDateString(),
     premium: post.isPremium,
     action: (
-      <Tooltip content={post.isPublished ? "Unpublish" : "Publish"}>
-        <Button
-          size="sm"
-          color={post.isPublished ? "danger" : "success"}
-          //   onPress={(e) => {
-          //     e.stopPropagation(); // Prevent row click
-          //     handlePublishToggle(post._id, post.isPublished);
-          //   }}
-        >
-          {post.isPublished ? "Unpublish" : "Publish"}
-        </Button>
-      </Tooltip>
+      <Button
+        size="sm"
+        color={post.isPublished ? "danger" : "success"}
+        onPress={() => changePostVisibilty(post._id)}
+      >
+        {post.isPublished ? "Unpublish" : "Publish"}
+      </Button>
     ),
   }));
 
@@ -115,7 +111,7 @@ const Contents = () => {
         </TableHeader>
         <TableBody
           items={rows}
-          isLoading={isFetching}
+          isLoading={isFetching || isPending}
           loadingContent={
             <div className=" bg-black/10 z-[999] backdrop-blur-md w-full h-full flex justify-center items-center">
               <Spinner size="lg" />
@@ -123,11 +119,7 @@ const Contents = () => {
           }
         >
           {(item: PostItem) => (
-            <TableRow
-              key={item.key}
-              //   onClick={() => router.push(`/posts/${item.key}`)}
-              className="cursor-pointer"
-            >
+            <TableRow key={item.key} className="cursor-pointer">
               {(columnKey) => (
                 <TableCell>{getKeyValue(item, columnKey)}</TableCell>
               )}

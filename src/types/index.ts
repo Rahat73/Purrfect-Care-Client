@@ -30,6 +30,8 @@ export interface IUser {
   following: string[];
   premiumPostsPurchased: string[];
   isBlocked: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IPost {
