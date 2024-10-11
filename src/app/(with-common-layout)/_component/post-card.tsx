@@ -77,7 +77,7 @@ export default function PostCard({ post }: { post: IPost }) {
 
   return (
     <Card
-      className="w-11/12 lg:w-[600px] mx-auto my-4"
+      className="w-full  lg:w-[600px] mx-auto my-4"
       isPressable
       onPress={() => router.push(`/posts/${localPost._id}`)}
     >

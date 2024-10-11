@@ -127,7 +127,7 @@ export default function CreatePostPage() {
 
     const postData = {
       ...data,
-      isPremium: Number(data.isPremium),
+      isPremium: isPremiumChecked ? Number(data.isPremium) : 0,
       content,
       images,
     };

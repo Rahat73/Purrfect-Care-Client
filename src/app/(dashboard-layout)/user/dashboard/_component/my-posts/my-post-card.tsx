@@ -1,18 +1,28 @@
 "use client";
 
 import HtmlContentRenderer from "@/src/components/html-content-render";
+import { useDeletePost, useUpdatePost } from "@/src/hooks/post.hook";
 import { IPost } from "@/src/types";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
+import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaComment, FaCrown, FaThumbsDown, FaThumbsUp } from "react-icons/fa";
+import { FaPen, FaTrash } from "react-icons/fa6";
 
 const MyPostCard = ({ post }: { post: IPost }) => {
   const [seeMoreClicked, setSeeMoreClicked] = useState(false);
 
   const router = useRouter();
+
+  // const { mutate: handleUpdatePost, isPending: editPostLoading } =
+  //   useUpdatePost();
+
+  const { mutate: handleDeletePost, isPending: deletePostLoading } =
+    useDeletePost();
 
   return (
     <Card
@@ -74,11 +84,40 @@ const MyPostCard = ({ post }: { post: IPost }) => {
             <FaComment className="mr-1" /> {post.comments.length}
           </div>
 
-          {post.isPremium === 0 && (
+          {post.isPremium > 0 && (
             <FaCrown className="text-yellow-500 mr-2 text-xl" />
           )}
         </div>
-        <Button variant="shadow">Delete</Button>
+        <div className="flex space-x-3">
+          <Link href={`/posts/edit-post/${post._id}`}>
+            <Button variant="shadow" color="default" size="sm">
+              <FaPen /> Edit
+            </Button>
+          </Link>
+          <Popover showArrow>
+            <PopoverTrigger>
+              <Button variant="shadow" color="danger" size="sm">
+                <FaTrash /> Delete
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <p className="text-red-500">
+                Are you sure you want to delete this post?
+              </p>
+              <div className="flex justify-end">
+                <Button
+                  size="sm"
+                  className="mt-2"
+                  color="danger"
+                  isLoading={deletePostLoading}
+                  onPress={() => handleDeletePost(post._id)}
+                >
+                  Yes, delete
+                </Button>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
       </CardFooter>
     </Card>
   );

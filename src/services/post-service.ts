@@ -1,5 +1,6 @@
 "use server";
 
+import { FieldValues } from "react-hook-form";
 import envConfig from "../config/env-config";
 import axiosInstance from "../lib/axios-instance";
 
@@ -27,6 +28,24 @@ export const getAllPosts = async (queryParams?: Record<string, any>) => {
 export const getPostById = async (postId: string) => {
   try {
     const { data } = await axiosInstance.get(`/posts/${postId}`);
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const updatePost = async (postId: string, postData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.put(`/posts/${postId}`, postData);
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const deletePost = async (postId: string) => {
+  try {
+    const { data } = await axiosInstance.delete(`/posts/${postId}`);
     return data;
   } catch (error: any) {
     throw new Error(error.response.data.message);
