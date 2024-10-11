@@ -34,6 +34,7 @@ import { usePasswordChange } from "@/src/hooks/auth.hook";
 import { useRouter } from "next/navigation";
 import { logout } from "@/src/services/auth-service";
 import { useUser } from "@/src/context/user.provider";
+import Link from "next/link";
 
 export default function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -170,9 +171,11 @@ export default function ProfilePage() {
                 <FaLock /> Change Password
               </Button>
             </div>
-            <Button variant="shadow" color="default">
-              <FaUser /> User dashboard
-            </Button>
+            <Link href="/user/dashboard">
+              <Button variant="shadow" color="default">
+                <FaUser /> User dashboard
+              </Button>
+            </Link>
           </CardFooter>
         </Card>
       )}

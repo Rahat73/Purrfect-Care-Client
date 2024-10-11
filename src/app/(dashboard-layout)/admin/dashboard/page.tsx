@@ -6,6 +6,7 @@ import { BsFilePostFill } from "react-icons/bs";
 import { FaDollarSign, FaUsers } from "react-icons/fa6";
 import Contents from "./_component/contents/contents";
 import Users from "./_component/users/users";
+import PaymentHistory from "./_component/payments-history/payments-history";
 
 const AdminDashboard = () => {
   return (
@@ -46,12 +47,7 @@ const AdminDashboard = () => {
               </div>
             }
           >
-            <Card>
-              <CardBody>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum.
-              </CardBody>
-            </Card>
+            <PaymentHistory />
           </Tab>
         </Tabs>
       </div>

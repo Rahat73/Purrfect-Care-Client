@@ -44,7 +44,7 @@ export interface IPost {
   upvotes: string[];
   downvotes: string[];
   images: string[];
-  comments: { author: IUser; content: string }[];
+  comments: { _id: string; author: IUser; content: string }[];
   isPublished: boolean;
   createdAt: string;
   updatedAt: string;

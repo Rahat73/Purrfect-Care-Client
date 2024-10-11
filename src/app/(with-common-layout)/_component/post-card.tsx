@@ -12,6 +12,7 @@ import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { Spacer } from "@nextui-org/spacer";
 import { Tooltip } from "@nextui-org/tooltip";
+import { formatDistance } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -128,6 +129,11 @@ export default function PostCard({ post }: { post: IPost }) {
 
       {/* Body: Post Content */}
       <CardBody className="px-3 py-0 text-small text-default-600">
+        <small className="text-xs text-default-500">
+          {formatDistance(new Date(localPost.createdAt), new Date(), {
+            addSuffix: true,
+          })}
+        </small>
         <h4 className="text-lg font-bold">{localPost.title}</h4>
         <p className="pt-2">
           {localPost.content.length > 100 && !seeMoreClicked ? (
