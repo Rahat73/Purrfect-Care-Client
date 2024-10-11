@@ -4,6 +4,7 @@ import HtmlContentRenderer from "@/src/components/html-content-render";
 import { useUser } from "@/src/context/user.provider";
 import { useFollowUser } from "@/src/hooks/follow.hook";
 import { useVotePost } from "@/src/hooks/post-action.hook";
+import { usePurchasePost } from "@/src/hooks/post.hook";
 import { useUserInfo } from "@/src/hooks/user.hook";
 import { IPost } from "@/src/types";
 import { Avatar } from "@nextui-org/avatar";
@@ -17,6 +18,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
+  FaCrown,
   FaRegCommentDots,
   FaRegThumbsDown,
   FaRegThumbsUp,
@@ -74,6 +76,9 @@ export default function PostCard({ post }: { post: IPost }) {
         }
       },
     });
+
+  const { mutateAsync: purchasePost, isPending: purchasePending } =
+    usePurchasePost();
 
   return (
     <Card
@@ -134,49 +139,118 @@ export default function PostCard({ post }: { post: IPost }) {
             addSuffix: true,
           })}
         </small>
-        <h4 className="text-lg font-bold">{localPost.title}</h4>
-        <p className="pt-2">
-          {localPost.content.length > 100 && !seeMoreClicked ? (
-            <>
-              <HtmlContentRenderer content={localPost.content.slice(0, 100)} />
-              ...{" "}
-              <span
-                className="text-default-500 cursor-pointer"
-                onClick={() => setSeeMoreClicked(true)}
+        <h4 className="text-lg font-bold flex items-center gap-2">
+          {localPost?.isPremium > 0 && <FaCrown className="text-amber-500" />}
+          {localPost.title}
+        </h4>
+        {!(localPost?.isPremium > 0) ||
+        loggedinUser?._id === localPost.author._id ||
+        user?.premiumPostsPurchased?.includes(localPost._id) ? (
+          <>
+            <p className="pt-2">
+              {localPost.content.length > 100 && !seeMoreClicked ? (
+                <>
+                  <HtmlContentRenderer
+                    content={localPost.content.slice(0, 100)}
+                  />
+                  ...{" "}
+                  <span
+                    className="text-default-500 cursor-pointer"
+                    onClick={() => setSeeMoreClicked(true)}
+                  >
+                    See more
+                  </span>
+                </>
+              ) : (
+                <HtmlContentRenderer content={localPost.content} />
+              )}
+            </p>
+            <Spacer y={4} />
+            <span className="text-xs text-default-500">
+              Category: {localPost.category}
+            </span>
+            {/* Post Images */}
+            <Spacer y={4} />
+            {localPost.images.length > 0 && (
+              <div className="flex gap-3">
+                {localPost.images.map((image, index) => (
+                  <Image
+                    isBlurred
+                    isZoomed
+                    key={index}
+                    src={image}
+                    alt={`post-image-${index}`}
+                    width={150}
+                    height={150}
+                  />
+                ))}
+              </div>
+            )}
+            <Spacer y={4} />
+          </>
+        ) : (
+          <>
+            <div className="flex gap-2 items-center">
+              <p>Purchase premium to see full content</p>
+              <Button
+                className=""
+                size="sm"
+                color="warning"
+                onPress={async () => {
+                  const data = await purchasePost(localPost._id);
+                  window.location.href = data.data.payment_url;
+                }}
+                isLoading={purchasePending}
               >
-                See more
+                Purchase
+              </Button>
+            </div>
+            <div className="filter blur-xl">
+              <p className="pt-2">
+                - This is Dummy Content. You need to purchase premium to see it.{" "}
+                <br />
+                - This is Dummy Content.
+                <br />- This is Dummy Content.
+                <br />- This is Dummy Content.
+              </p>
+              <Spacer y={4} />
+              <span className="text-xs text-default-500">
+                Category: {localPost.category}
               </span>
-            </>
-          ) : (
-            <HtmlContentRenderer content={localPost.content} />
-          )}
-        </p>
-        <Spacer y={4} />
-        <span className="text-xs text-default-500">
-          Category: {localPost.category}
-        </span>
-        {/* Post Images */}
-        <Spacer y={4} />
-        {localPost.images.length > 0 && (
-          <div className="flex gap-3">
-            {localPost.images.map((image, index) => (
-              <Image
-                isBlurred
-                isZoomed
-                key={index}
-                src={image}
-                alt={`post-image-${index}`}
-                width={150}
-                height={150}
-              />
-            ))}
-          </div>
+              {/* Post Images */}
+              <Spacer y={4} />
+              {localPost.images.length > 0 && (
+                <div className="flex gap-3">
+                  <Image
+                    isBlurred
+                    isZoomed
+                    src={
+                      "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3V0ZSUyMGNhdHxlbnwwfHwwfHx8MA%3D%3D"
+                    }
+                    alt={"dummy image"}
+                    width={150}
+                    height={150}
+                  />
+                  <Image
+                    isBlurred
+                    isZoomed
+                    src={
+                      "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg"
+                    }
+                    alt={"dummy image"}
+                    width={150}
+                    height={150}
+                  />
+                </div>
+              )}
+              <Spacer y={4} />
+            </div>
+          </>
         )}
-        <Spacer y={4} />
       </CardBody>
 
       {/* Footer: Actions (Upvotes, Downvotes, Comments) */}
-      {user && (
+      {loggedinUser && (
         <CardFooter className="gap-7 flex justify-center">
           <Tooltip content="Upvote">
             <Button

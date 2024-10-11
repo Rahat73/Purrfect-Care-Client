@@ -45,12 +45,20 @@ export default function CreatePostPage() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<CreatePostFormData>({
     resolver: zodResolver(createPostSchema),
   });
 
   const { mutate: handleCreatePost, isPending } = useCreatePost({
     invalidateQueries: ["GET_ALL_POST"],
+    onSuccess: () => {
+      reset();
+      setContent("");
+      setImageFiles([]);
+      setImagePreviews([]);
+      setIsPremiumChecked(false);
+    },
   });
 
   const [content, setContent] = useState("");

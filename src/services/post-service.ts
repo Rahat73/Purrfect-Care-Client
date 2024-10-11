@@ -1,7 +1,6 @@
 "use server";
 
 import { FieldValues } from "react-hook-form";
-import envConfig from "../config/env-config";
 import axiosInstance from "../lib/axios-instance";
 
 export const createPost = async (postData: Record<string, any>) => {
@@ -66,6 +65,15 @@ export const changePostVisibilty = async (postId: string) => {
     const { data } = await axiosInstance.put(
       `/posts/change-visibility/${postId}`
     );
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const purchasePost = async (postId: string) => {
+  try {
+    const { data } = await axiosInstance.post(`/payment/purchase`, { postId });
     return data;
   } catch (error: any) {
     throw new Error(error.response.data.message);

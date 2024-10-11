@@ -6,6 +6,7 @@ import {
   getAllPosts,
   getMyPosts,
   getPostById,
+  purchasePost,
   updatePost,
 } from "../services/post-service";
 import { IPost } from "../types";
@@ -14,8 +15,10 @@ import { FieldValues } from "react-hook-form";
 
 export const useCreatePost = ({
   invalidateQueries,
+  onSuccess,
 }: {
   invalidateQueries: string[];
+  onSuccess: () => void;
 }) => {
   const queryClient = useQueryClient();
   return useMutation<any, Error, Record<string, any>>({
@@ -23,6 +26,7 @@ export const useCreatePost = ({
     mutationFn: async (postData) => await createPost(postData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: invalidateQueries });
+      onSuccess();
       toast.success("Post created successfully");
     },
     onError: (error: any) => {
@@ -124,6 +128,21 @@ export const useChangePostVisibilty = () => {
     mutationFn: async (postId) => await changePostVisibilty(postId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
+    },
+    onError: (error: any) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const usePurchasePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation<any, Error, string>({
+    mutationKey: ["PURCHASE_POST"],
+    mutationFn: async (postId) => await purchasePost(postId),
+    onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: ["GET_MY_POSTS"] });
+      toast.success("You will be redirected to the payment gateway");
     },
     onError: (error: any) => {
       toast.error(error.message);
