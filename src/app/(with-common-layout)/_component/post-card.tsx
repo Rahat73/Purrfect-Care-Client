@@ -3,8 +3,8 @@
 import HtmlContentRenderer from "@/src/components/html-content-render";
 import { useUser } from "@/src/context/user.provider";
 import { useFollowUser } from "@/src/hooks/follow.hook";
+import { usePurchasePost } from "@/src/hooks/payment.hook";
 import { useVotePost } from "@/src/hooks/post-action.hook";
-import { usePurchasePost } from "@/src/hooks/post.hook";
 import { useUserInfo } from "@/src/hooks/user.hook";
 import { IPost } from "@/src/types";
 import { Avatar } from "@nextui-org/avatar";

@@ -1,4 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 import {
   changePostVisibilty,
   createPost,
@@ -6,12 +8,9 @@ import {
   getAllPosts,
   getMyPosts,
   getPostById,
-  purchasePost,
   updatePost,
 } from "../services/post-service";
 import { IPost } from "../types";
-import { toast } from "sonner";
-import { FieldValues } from "react-hook-form";
 
 export const useCreatePost = ({
   invalidateQueries,
@@ -36,6 +35,7 @@ export const useCreatePost = ({
 };
 
 export const useGetAllPosts = (queryParams?: Record<string, any>) => {
+  console.log(queryParams);
   const { data, isLoading, refetch, isSuccess, isFetching } = useQuery({
     queryKey: ["GET_ALL_POST", queryParams],
     queryFn: async () => await getAllPosts(queryParams),
@@ -128,21 +128,6 @@ export const useChangePostVisibilty = () => {
     mutationFn: async (postId) => await changePostVisibilty(postId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
-    },
-    onError: (error: any) => {
-      toast.error(error.message);
-    },
-  });
-};
-
-export const usePurchasePost = () => {
-  const queryClient = useQueryClient();
-  return useMutation<any, Error, string>({
-    mutationKey: ["PURCHASE_POST"],
-    mutationFn: async (postId) => await purchasePost(postId),
-    onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["GET_MY_POSTS"] });
-      toast.success("You will be redirected to the payment gateway");
     },
     onError: (error: any) => {
       toast.error(error.message);

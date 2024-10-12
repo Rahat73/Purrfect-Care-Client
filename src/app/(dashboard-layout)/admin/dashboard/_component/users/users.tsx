@@ -22,15 +22,15 @@ import { FaUserShield, FaUserSlash } from "react-icons/fa6";
 
 const columns = [
   { key: "profilePicture", label: "" },
-  { key: "name", label: "Name" },
-  { key: "email", label: "Email" },
-  { key: "role", label: "Role" },
-  { key: "followersCount", label: "Followers" },
-  { key: "followingCount", label: "Following" },
+  { key: "name", label: "NAME" },
+  { key: "email", label: "EMAIL" },
+  { key: "role", label: "ROLE" },
+  { key: "followersCount", label: "FOLLOWERS" },
+  { key: "followingCount", label: "FOLLOWING" },
   //   { key: "purchasedPosts", label: "Purchased Posts" },
   //   { key: "createdAt", label: "Created Date" },
-  { key: "isBlocked", label: "Status" },
-  { key: "actions", label: "Actions" },
+  { key: "isBlocked", label: "STATUS" },
+  { key: "actions", label: "ACTION" },
 ];
 
 const Users = () => {

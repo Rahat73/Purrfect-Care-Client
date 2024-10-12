@@ -48,14 +48,14 @@ const Contents = () => {
   const { mutate: changePostVisibilty, isPending } = useChangePostVisibilty();
 
   const columns = [
-    { key: "title", label: "Post Title" },
-    { key: "author", label: "Author" },
-    { key: "comments", label: "Comments" },
-    { key: "upvotes", label: "Upvotes" },
-    { key: "downvotes", label: "Downvotes" },
-    { key: "createdAt", label: "Created At" },
-    { key: "premium", label: "Premium" },
-    { key: "action", label: "Action" },
+    { key: "title", label: "POST TITLE" },
+    { key: "author", label: "AUTHOR" },
+    { key: "comments", label: "COMMENTS" },
+    { key: "upvotes", label: "UPVOTES" },
+    { key: "downvotes", label: "DOWNVOTES" },
+    { key: "createdAt", label: "CREATED AT" },
+    { key: "premium", label: "PREMIUM" },
+    { key: "action", label: "ACTION" },
   ];
 
   const rows = posts.map((post: IPost) => ({

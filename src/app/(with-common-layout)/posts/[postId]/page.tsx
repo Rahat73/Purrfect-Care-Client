@@ -13,7 +13,7 @@ import {
   useEditComment,
   useVotePost,
 } from "@/src/hooks/post-action.hook";
-import { useGetPostById, usePurchasePost } from "@/src/hooks/post.hook";
+import { useGetPostById } from "@/src/hooks/post.hook";
 import { useUserInfo } from "@/src/hooks/user.hook";
 import { addCommentValidationSchema } from "@/src/schemas/post.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,6 +38,7 @@ import {
   FaThumbsUp,
 } from "react-icons/fa6";
 import { useUser } from "@/src/context/user.provider";
+import { usePurchasePost } from "@/src/hooks/payment.hook";
 
 const PostDetailsPage = ({ params }: { params: { postId: string } }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);

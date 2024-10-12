@@ -20,7 +20,7 @@ export default function LeftSidebar() {
 
   const menuItems = [
     { label: "HOME", icon: FaHouse, href: "/" },
-    { label: "SEARCH", icon: FaMagnifyingGlass, href: "/search" },
+    { label: "SEARCH", icon: FaMagnifyingGlass, href: "/?search" },
     { label: "CREATE POST", icon: FaPlus, href: "/posts/create-post" },
     { label: "PROFILE", icon: FaUser, href: "/profile" },
     { label: "DASHBOARD", icon: FaTableList, href: `/user/dashboard` },
