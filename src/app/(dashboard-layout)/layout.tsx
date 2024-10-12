@@ -3,6 +3,7 @@ import { siteConfig } from "@/src/config/site";
 import "@/src/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import LeftSidebar from "../(with-common-layout)/_component/left-sidebar";
+import BottomNavbar from "../(with-common-layout)/_component/bottom-navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -42,6 +43,7 @@ export default function DashboardLayout({
           {children}
         </main>
       </div>
+      <BottomNavbar />
     </div>
   );
 }

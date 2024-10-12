@@ -48,7 +48,7 @@ export default function RegisterPage() {
       <div className="flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center">
         <h3 className="my-2 text-2xl font-bold">Sign up with Purrfect Care</h3>
         <p className="mb-4">Let&lsquo;s Get You Signed Up !</p>
-        <div className="w-[35%]">
+        <div className="w-10/12 md:w-[35%]">
           <AppForm
             onSubmit={onSubmit}
             resolver={zodResolver(registrationValidationSchema)}
@@ -86,7 +86,10 @@ export default function RegisterPage() {
             </Button>
           </AppForm>
           <div className="text-center">
-            Already have an account ? <Link href={"/login"}>Login</Link>
+            Already have an account ?{" "}
+            <Link href={"/login"} className="text-primary-500">
+              Login
+            </Link>
           </div>
         </div>
       </div>

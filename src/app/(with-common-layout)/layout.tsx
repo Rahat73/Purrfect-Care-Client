@@ -4,6 +4,7 @@ import { Metadata, Viewport } from "next";
 import { siteConfig } from "../../config/site";
 import LeftSidebar from "./_component/left-sidebar";
 import RightSidebar from "./_component/right-sidebar";
+import BottomNavbar from "./_component/bottom-navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -50,6 +51,7 @@ export default function WithCommonLayout({
           </div>
         </div>
       </div>
+      <BottomNavbar />
     </div>
   );
 }
