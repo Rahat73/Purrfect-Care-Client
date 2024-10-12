@@ -144,8 +144,8 @@ export default function CreatePostPage() {
   };
 
   return (
-    <section className="flex justify-center my-10">
-      <Card className="w-11/12 p-5">
+    <section className="flex justify-center w-full my-10">
+      <Card className="w-full md:w-11/12 md:p-5">
         <CardHeader className="flex justify-center">
           <h2 className="font-bold text-xl">Create New Post</h2>
         </CardHeader>
@@ -186,7 +186,7 @@ export default function CreatePostPage() {
               items={selectOptions}
               label="Category"
               placeholder="Select an category"
-              className="max-w-xs"
+              className="max-w-xs mt-4"
               {...register("category")}
               isInvalid={!!errors.category}
               errorMessage={errors.category?.message}

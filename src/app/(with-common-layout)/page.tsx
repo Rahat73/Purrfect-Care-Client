@@ -14,7 +14,7 @@ export default function Home({
 }: {
   searchParams: Record<string, string>;
 }) {
-  const { category, search } = searchParams;
+  const { category, search, sort } = searchParams;
 
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
@@ -46,7 +46,11 @@ export default function Home({
     page,
     limit: 5,
     category,
-    sort: category && "-upvotes", // Sort by upvotes if category is set
+    sort: sort
+      ? sort
+      : category || search !== undefined
+      ? "-upvotes"
+      : undefined, // Sort by upvotes if category, search is set
     isPublished: true,
     searchParams: search !== undefined ? debouncedSearchTerm : undefined,
   });
@@ -56,7 +60,7 @@ export default function Home({
     setPage(1);
     setPosts([]); // Clear posts on category change
     setHasMore(true); // Reset hasMore flag
-  }, [category, debouncedSearchTerm]);
+  }, [category, debouncedSearchTerm, sort]);
 
   // Update posts when new data is fetched
   useEffect(() => {

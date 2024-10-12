@@ -7,21 +7,41 @@ const RightSidebar = () => {
   return (
     <aside className="p-10 bg-transparent text-default-600">
       <div>
-        {/* Post Categories Section */}
+        {/* Post Categories Filter Section */}
+        <div className="mb-6">
+          <h2 className="font-semibold text-lg">Filter</h2>
+          <ul className="mt-2">
+            <li className="hover:bg-default-200 transition-all rounded-md p-2">
+              <Link href="/?sort=-upvotes" className=" transition-all">
+                Upvote
+              </Link>
+            </li>
+            <li className="hover:bg-default-200 transition-all rounded-md p-2">
+              <Link href="/?sort=-downvotes" className=" transition-all">
+                DownVote
+              </Link>
+            </li>
+            <li className="hover:bg-default-200 transition-all rounded-md p-2">
+              <Link href="/" className=" transition-all">
+                All
+              </Link>
+            </li>
+          </ul>
+        </div>
         <div className="mb-6">
           <h2 className="font-semibold text-lg">Categories</h2>
-          <ul className="space-y-2 mt-2">
-            <li>
+          <ul className="mt-2">
+            <li className="hover:bg-default-200 transition-all rounded-md p-2">
               <Link href="/?category=Tip" className=" transition-all">
                 Tip
               </Link>
             </li>
-            <li>
+            <li className="hover:bg-default-200 transition-all rounded-md p-2">
               <Link href="/?category=Story" className=" transition-all">
                 Story
               </Link>
             </li>
-            <li>
+            <li className="hover:bg-default-200 transition-all rounded-md p-2">
               <Link href="/" className=" transition-all">
                 All
               </Link>
@@ -36,20 +56,17 @@ const RightSidebar = () => {
           </h2>
           <ul className="space-y-2 mt-2">
             {/* Example items, replace with dynamic data */}
-            <li>
-              <Link href="/post/premium/1" className=" transition-all">
-                Premium Post 1
-              </Link>
+            <li className="cursor-not-allowed">
+              {/* <Link href="/post/premium/1" className=" transition-all"> */}
+              Premium Post 1{/* </Link> */}
             </li>
-            <li>
-              <Link href="/post/premium/2" className=" transition-all">
-                Premium Post 2
-              </Link>
+            <li className="cursor-not-allowed">
+              {/* <Link href="/post/premium/1" className=" transition-all"> */}
+              Premium Post 2{/* </Link> */}
             </li>
-            <li>
-              <Link href="/post/premium/3" className=" transition-all">
-                Premium Post 3
-              </Link>
+            <li className="cursor-not-allowed">
+              {/* <Link href="/post/premium/1" className=" transition-all"> */}
+              Premium Post 3{/* </Link> */}
             </li>
           </ul>
         </div>
@@ -59,20 +76,17 @@ const RightSidebar = () => {
           <h2 className="font-semibold text-lg ">Suggested Users</h2>
           <ul className="space-y-2 mt-2">
             {/* Example items, replace with dynamic data */}
-            <li>
-              <Link href="/profile/1" className=" transition-all">
-                User 1
-              </Link>
+            <li className="cursor-not-allowed">
+              {/* <Link href="/post/premium/1" className=" transition-all"> */}
+              User 1{/* </Link> */}
             </li>
-            <li>
-              <Link href="/profile/2" className=" transition-all">
-                User 2
-              </Link>
+            <li className="cursor-not-allowed">
+              {/* <Link href="/post/premium/1" className=" transition-all"> */}
+              User 2{/* </Link> */}
             </li>
-            <li>
-              <Link href="/profile/3" className=" transition-all">
-                User 3
-              </Link>
+            <li className="cursor-not-allowed">
+              {/* <Link href="/post/premium/1" className=" transition-all"> */}
+              User 1{/* </Link> */}
             </li>
           </ul>
         </div>

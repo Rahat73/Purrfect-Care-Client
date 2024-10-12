@@ -69,13 +69,53 @@ export const Navbar = () => {
 
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
+          {/* {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link color={"foreground"} href={item.href} size="lg">
                 {item.label}
               </Link>
             </NavbarMenuItem>
-          ))}
+          ))} */}
+          <div className="mb-6">
+            <h2 className="font-semibold text-lg">Filter</h2>
+            <ul className="mt-2">
+              <li className="hover:bg-default-200 transition-all rounded-md p-2">
+                <Link href="/?sort=-upvotes" className=" transition-all">
+                  Upvote
+                </Link>
+              </li>
+              <li className="hover:bg-default-200 transition-all rounded-md p-2">
+                <Link href="/?sort=-downvotes" className=" transition-all">
+                  DownVote
+                </Link>
+              </li>
+              <li className="hover:bg-default-200 transition-all rounded-md p-2">
+                <Link href="/" className=" transition-all">
+                  All
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="mb-6">
+            <h2 className="font-semibold text-lg">Categories</h2>
+            <ul className="mt-2">
+              <li className="hover:bg-default-200 transition-all rounded-md p-2">
+                <Link href="/?category=Tip" className=" transition-all">
+                  Tip
+                </Link>
+              </li>
+              <li className="hover:bg-default-200 transition-all rounded-md p-2">
+                <Link href="/?category=Story" className=" transition-all">
+                  Story
+                </Link>
+              </li>
+              <li className="hover:bg-default-200 transition-all rounded-md p-2">
+                <Link href="/" className=" transition-all">
+                  All
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </NavbarMenu>
     </NextUINavbar>
