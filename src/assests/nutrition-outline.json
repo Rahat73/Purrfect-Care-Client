@@ -1,0 +1,112 @@
+{
+  "pets": {
+    "cat": {
+      "ageGroups": {
+        "kitten": {
+          "weightRanges": {
+            "0-2kg": {
+              "calories": 200,
+              "protein": "25g",
+              "fat": "10g",
+              "carbs": "20g"
+            },
+            "2-4kg": {
+              "calories": 300,
+              "protein": "35g",
+              "fat": "12g",
+              "carbs": "25g"
+            }
+          }
+        },
+        "adult": {
+          "weightRanges": {
+            "2-4kg": {
+              "calories": 250,
+              "protein": "30g",
+              "fat": "15g",
+              "carbs": "20g"
+            },
+            "4-6kg": {
+              "calories": 350,
+              "protein": "40g",
+              "fat": "20g",
+              "carbs": "25g"
+            }
+          }
+        }
+      }
+    },
+    "dog": {
+      "ageGroups": {
+        "puppy": {
+          "weightRanges": {
+            "0-5kg": {
+              "calories": 500,
+              "protein": "50g",
+              "fat": "20g",
+              "carbs": "30g"
+            },
+            "5-10kg": {
+              "calories": 700,
+              "protein": "70g",
+              "fat": "25g",
+              "carbs": "40g"
+            }
+          }
+        },
+        "adult": {
+          "weightRanges": {
+            "5-10kg": {
+              "calories": 600,
+              "protein": "60g",
+              "fat": "22g",
+              "carbs": "35g"
+            },
+            "10-20kg": {
+              "calories": 800,
+              "protein": "75g",
+              "fat": "30g",
+              "carbs": "50g"
+            }
+          }
+        }
+      }
+    },
+    "bird": {
+      "ageGroups": {
+        "young": {
+          "weightRanges": {
+            "0-0.1kg": {
+              "calories": 100,
+              "protein": "5g",
+              "fat": "2g",
+              "carbs": "10g"
+            },
+            "0.1-0.2kg": {
+              "calories": 150,
+              "protein": "8g",
+              "fat": "3g",
+              "carbs": "12g"
+            }
+          }
+        },
+        "adult": {
+          "weightRanges": {
+            "0.1-0.2kg": {
+              "calories": 120,
+              "protein": "6g",
+              "fat": "2.5g",
+              "carbs": "11g"
+            },
+            "0.2-0.3kg": {
+              "calories": 180,
+              "protein": "9g",
+              "fat": "3.5g",
+              "carbs": "14g"
+            }
+          }
+        }
+      }
+    }
+  }
+}

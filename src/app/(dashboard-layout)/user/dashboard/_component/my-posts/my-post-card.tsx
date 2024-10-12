@@ -35,7 +35,7 @@ const MyPostCard = ({ post }: { post: IPost }) => {
       </CardHeader>
 
       {post.images?.length > 0 && (
-        <div className="flex justify-center gap-3">
+        <div className="flex justify-center mx-3 gap-3">
           {post.images.map((image, index) => (
             <Image
               isBlurred
