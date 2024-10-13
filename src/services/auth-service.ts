@@ -16,7 +16,7 @@ export const registerUser = async (userData: FieldValues) => {
 
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data;
   }
 };
 
@@ -29,13 +29,25 @@ export const loginUser = async (userData: FieldValues) => {
     }
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data;
   }
 };
 
 export const logout = () => {
   cookies().delete("accessToken");
   // cookies().delete("refreshToken");
+};
+
+export const forgotPassword = async (emailData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/auth/forgot-password",
+      emailData
+    );
+    return data;
+  } catch (error: any) {
+    return error.response.data;
+  }
 };
 
 export const changePassword = async (passwordData: FieldValues) => {
@@ -46,7 +58,7 @@ export const changePassword = async (passwordData: FieldValues) => {
     );
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data;
   }
 };
 

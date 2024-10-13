@@ -20,7 +20,6 @@ export const addComment = async (
   postId: string,
   commentData: { content: string }
 ) => {
-  console.log(commentData, postId);
   try {
     const { data } = await axiosInstance.put(
       `/posts/comment/${postId}`,

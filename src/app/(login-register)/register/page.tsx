@@ -21,27 +21,33 @@ export default function RegisterPage() {
   const redirect = searchParams.get("redirect");
 
   const [showPass, setShowPass] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
-  const {
-    mutate: handleUserRegistration,
-    isPending,
-    isSuccess,
-  } = useUserRegistration();
+  const { mutateAsync: handleUserRegistration, isPending } =
+    useUserRegistration();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    handleUserRegistration(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const res = await handleUserRegistration(data);
+
+    if (!res.success) {
+      setLoginSuccess(false);
+      return;
+    }
+
+    setLoginSuccess(true);
+
     userLoading(true);
   };
 
   useEffect(() => {
-    if (!isPending && isSuccess) {
+    if (!isPending && loginSuccess) {
       if (redirect) {
         router.push(redirect);
       } else {
         router.push("/");
       }
     }
-  }, [isPending, isSuccess]);
+  }, [isPending, loginSuccess]);
 
   return (
     <div>

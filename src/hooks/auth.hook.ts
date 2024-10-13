@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import {
   changePassword,
+  forgotPassword,
   loginUser,
   registerUser,
 } from "../services/auth-service";
@@ -11,12 +12,16 @@ export const useUserRegistration = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["USER_REGISTRATION"],
     mutationFn: async (userData) => await registerUser(userData),
-    onSuccess: () => {
-      toast.success("User registration successful.");
+    onSuccess: (data) => {
+      if (data?.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
-    onError: (error) => {
-      toast.error(error.message);
-    },
+    // onError: (error) => {
+    //   toast.error(error.message);
+    // },
   });
 };
 
@@ -24,12 +29,33 @@ export const useUserLogin = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["USER_LOGIN"],
     mutationFn: async (userData) => await loginUser(userData),
-    onSuccess: () => {
-      toast.success("User login successful.");
+    onSuccess: (data) => {
+      if (data?.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
-    onError: (error) => {
-      toast.error(error.message);
+    // onError: (error) => {
+    //   toast.error(error.message);
+    // },
+  });
+};
+
+export const useForgotPassword = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["FORGOT_PASSWORD"],
+    mutationFn: async (emailData) => await forgotPassword(emailData),
+    onSuccess: (data) => {
+      if (data?.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
+    // onError: (error) => {
+    //   toast.error(error.message);
+    // },
   });
 };
 
@@ -37,11 +63,15 @@ export const usePasswordChange = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["PASSWORD_CHANGE"],
     mutationFn: async (passwordData) => await changePassword(passwordData),
-    onSuccess: () => {
-      toast.success("Password changed successfully. Please login again.");
+    onSuccess: (data) => {
+      if (data?.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
-    onError: (error) => {
-      toast.error(error.message);
-    },
+    // onError: (error) => {
+    //   toast.error(error.message);
+    // },
   });
 };

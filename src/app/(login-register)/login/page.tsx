@@ -20,23 +20,31 @@ const LoginPage = () => {
   const redirect = searchParams.get("redirect");
 
   const [showPass, setShowPass] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
-  const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
+  const { mutateAsync: handleUserLogin, isPending } = useUserLogin();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    handleUserLogin(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const res = await handleUserLogin(data);
+
+    if (!res.success) {
+      setLoginSuccess(false);
+      return;
+    }
+
+    setLoginSuccess(true);
     userLoading(true);
   };
 
   useEffect(() => {
-    if (!isPending && isSuccess) {
+    if (!isPending && loginSuccess) {
       if (redirect) {
         router.push(redirect);
       } else {
         router.push("/");
       }
     }
-  }, [isPending, isSuccess]);
+  }, [isPending, loginSuccess]);
 
   return (
     <div className="flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center">
@@ -64,6 +72,7 @@ const LoginPage = () => {
               }
             />
           </div>
+
           <Button
             className="my-3 w-full rounded-md bg-default-900 font-semibold text-default"
             size="lg"
@@ -77,6 +86,11 @@ const LoginPage = () => {
           Don&lsquo;t have account ?{" "}
           <Link href={"/register"} className="text-primary-500">
             Register
+          </Link>
+        </div>
+        <div className="text-center my-1">
+          <Link href={"/forgot-password"} className="text-danger-500">
+            Forgot Password?
           </Link>
         </div>
       </div>

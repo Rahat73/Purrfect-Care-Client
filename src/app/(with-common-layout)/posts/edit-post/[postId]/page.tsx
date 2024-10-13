@@ -123,7 +123,6 @@ export default function EditPostPage({
 
         const url = response.data.secure_url;
         imageUrls = [...imageUrls, url];
-        console.log(url);
       } catch (error) {
         toast.error("Image upload failed");
       }

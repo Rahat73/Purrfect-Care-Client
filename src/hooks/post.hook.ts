@@ -35,7 +35,6 @@ export const useCreatePost = ({
 };
 
 export const useGetAllPosts = (queryParams?: Record<string, any>) => {
-  console.log(queryParams);
   const { data, isLoading, refetch, isSuccess, isFetching } = useQuery({
     queryKey: ["GET_ALL_POST", queryParams],
     queryFn: async () => await getAllPosts(queryParams),

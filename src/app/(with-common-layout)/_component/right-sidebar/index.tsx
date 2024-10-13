@@ -50,46 +50,32 @@ const RightSidebar = () => {
         </div>
 
         {/* Premium Posts Section */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <h2 className="font-semibold text-lg flex items-center">
             Premium Posts <FaCrown className="ml-2 text-yellow-500" />
           </h2>
           <ul className="space-y-2 mt-2">
-            {/* Example items, replace with dynamic data */}
             <li className="cursor-not-allowed">
-              {/* <Link href="/post/premium/1" className=" transition-all"> */}
-              Premium Post 1{/* </Link> */}
+              Premium Post 1
             </li>
             <li className="cursor-not-allowed">
-              {/* <Link href="/post/premium/1" className=" transition-all"> */}
-              Premium Post 2{/* </Link> */}
+              Premium Post 2
             </li>
             <li className="cursor-not-allowed">
-              {/* <Link href="/post/premium/1" className=" transition-all"> */}
-              Premium Post 3{/* </Link> */}
+              Premium Post 3
             </li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Suggested Users Section */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <h2 className="font-semibold text-lg ">Suggested Users</h2>
           <ul className="space-y-2 mt-2">
-            {/* Example items, replace with dynamic data */}
-            <li className="cursor-not-allowed">
-              {/* <Link href="/post/premium/1" className=" transition-all"> */}
-              User 1{/* </Link> */}
-            </li>
-            <li className="cursor-not-allowed">
-              {/* <Link href="/post/premium/1" className=" transition-all"> */}
-              User 2{/* </Link> */}
-            </li>
-            <li className="cursor-not-allowed">
-              {/* <Link href="/post/premium/1" className=" transition-all"> */}
-              User 1{/* </Link> */}
-            </li>
+            <li className="cursor-not-allowed">User 1</li>
+            <li className="cursor-not-allowed">User 2</li>
+            <li className="cursor-not-allowed">User 1</li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </aside>
   );
