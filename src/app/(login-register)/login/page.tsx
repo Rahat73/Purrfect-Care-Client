@@ -59,6 +59,7 @@ const LoginPage = () => {
         <AppForm
           onSubmit={onSubmit}
           resolver={zodResolver(loginValidationSchema)}
+          defaultValues={{ email: "admin@mail.com", password: "123456" }}
         >
           <div className="py-3">
             <AppInput name="email" label="Email" type="email" />
