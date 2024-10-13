@@ -12,7 +12,7 @@ export const votePost = async (
     const { data } = await axiosInstance.put(`/posts/vote/${postId}`, postData);
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
@@ -27,7 +27,7 @@ export const addComment = async (
     );
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
@@ -43,7 +43,7 @@ export const editComment = async (
     );
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
@@ -54,6 +54,6 @@ export const deleteComment = async (postId: string, commentId: string) => {
     );
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };

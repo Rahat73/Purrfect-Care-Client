@@ -23,10 +23,14 @@ export const useCreatePost = ({
   return useMutation<any, Error, Record<string, any>>({
     mutationKey: ["CREATE_POST"],
     mutationFn: async (postData) => await createPost(postData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateQueries });
-      onSuccess();
-      toast.success("Post created successfully");
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: invalidateQueries });
+        onSuccess();
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
@@ -76,12 +80,16 @@ export const useUpdatePost = ({
     mutationKey: ["UPDATE_POST"],
     mutationFn: async ({ postId, postData }) =>
       await updatePost(postId, postData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
-      queryClient.invalidateQueries({ queryKey: ["GET_MY_POSTS"] });
-      queryClient.invalidateQueries({ queryKey: invalidateQueries });
-      onSuccess();
-      toast.success("Post updated successfully");
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
+        queryClient.invalidateQueries({ queryKey: ["GET_MY_POSTS"] });
+        queryClient.invalidateQueries({ queryKey: invalidateQueries });
+        onSuccess();
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
@@ -94,10 +102,14 @@ export const useDeletePost = () => {
   return useMutation<any, Error, string>({
     mutationKey: ["DELETE_POST"],
     mutationFn: async (postId) => await deletePost(postId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
-      queryClient.invalidateQueries({ queryKey: ["GET_MY_POSTS"] });
-      toast.success("Post deleted successfully");
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
+        queryClient.invalidateQueries({ queryKey: ["GET_MY_POSTS"] });
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
@@ -125,8 +137,13 @@ export const useChangePostVisibilty = () => {
   return useMutation<any, Error, string>({
     mutationKey: ["CHANGE_POST_VISIBILITY"],
     mutationFn: async (postId) => await changePostVisibilty(postId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ["GET_ALL_POST"] });
+        toast.success("Post visibility changed successfully");
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);

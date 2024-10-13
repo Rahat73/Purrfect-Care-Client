@@ -25,7 +25,6 @@ import {
   FaThumbsDown,
   FaThumbsUp,
 } from "react-icons/fa6";
-import { toast } from "sonner";
 
 export default function PostCard({ post }: { post: IPost }) {
   const { data: user } = useUserInfo();

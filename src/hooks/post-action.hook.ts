@@ -26,10 +26,13 @@ export const useVotePost = ({
     mutationKey: ["VOTE_POST"],
     mutationFn: async ({ postId, postData }) =>
       await votePost(postId, postData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateQueries });
-      onSuccess();
-      //   toast.success("Voted successfully");
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: invalidateQueries });
+        onSuccess();
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
@@ -47,9 +50,12 @@ export const useAddComment = ({
     mutationKey: ["ADD_COMMENT"],
     mutationFn: async ({ postId, commentData }) =>
       await addComment(postId, commentData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateQueries });
-      //   toast.success("Voted successfully");
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: invalidateQueries });
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
@@ -69,9 +75,13 @@ export const useEditComment = ({
     mutationKey: ["EDIT_COMMENT"],
     mutationFn: async ({ postId, commentId, commentData }) =>
       await editComment(postId, commentId, commentData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateQueries });
-      onSuccess();
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: invalidateQueries });
+        onSuccess();
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
@@ -89,8 +99,12 @@ export const useDeleteComment = ({
     mutationKey: ["DELETE_COMMENT"],
     mutationFn: async ({ postId, commentId }) =>
       await deleteComment(postId, commentId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateQueries });
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: invalidateQueries });
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);

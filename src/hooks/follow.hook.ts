@@ -11,8 +11,12 @@ export const useFollowUser = ({
   return useMutation<any, Error, { followingId: string }>({
     mutationKey: ["FOLLOW_USER"],
     mutationFn: async (postData) => await followUser(postData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateQueries });
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: invalidateQueries });
+      } else {
+        toast.error(data.message);
+      }
       //   toast.success("Following user successfully");
     },
     onError: (error: any) => {

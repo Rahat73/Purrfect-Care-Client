@@ -39,7 +39,10 @@ const MyFollowers = () => {
                 alt={`${follower.name}'s profile picture`}
                 className="mr-4"
               />
-              <div className="text-small font-semibold">{follower.name}</div>
+              <div>
+                <div className="text-small font-semibold">{follower.name}</div>
+                <div className="text-small font-semibold">{follower.email}</div>
+              </div>
             </CardHeader>
           </Card>
         ))

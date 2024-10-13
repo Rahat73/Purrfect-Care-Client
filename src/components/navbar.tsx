@@ -19,6 +19,7 @@ import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "./theme-switch";
 import { useUser } from "@/src/context/user.provider";
 import NavbarDropdown from "./navbar-dropdown";
+import { Button } from "@nextui-org/button";
 
 export const Navbar = () => {
   const { user, isLoading } = useUser();
@@ -48,7 +49,11 @@ export const Navbar = () => {
           </NavbarItem>
         ) : (
           <NavbarItem className="hidden sm:flex gap-2">
-            <Link href="/login">Login</Link>
+            <Link href="/login">
+              <Button color="primary" radius="full">
+                Login
+              </Button>
+            </Link>
           </NavbarItem>
         )}
       </NavbarContent>
@@ -60,7 +65,11 @@ export const Navbar = () => {
           </NavbarItem>
         ) : (
           <NavbarItem className="gap-2">
-            <Link href="/login">Login</Link>
+            <Link href="/login">
+              <Button color="primary" radius="full" size="sm">
+                Login
+              </Button>
+            </Link>
           </NavbarItem>
         )}
         <ThemeSwitch />

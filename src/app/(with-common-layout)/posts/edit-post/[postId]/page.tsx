@@ -1,11 +1,6 @@
 "use client";
 
-import Loading from "@/src/app/loading";
-import {
-  useCreatePost,
-  useGetPostById,
-  useUpdatePost,
-} from "@/src/hooks/post.hook";
+import { useGetPostById, useUpdatePost } from "@/src/hooks/post.hook";
 import { createPostSchema, updatePostSchema } from "@/src/schemas/post.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";

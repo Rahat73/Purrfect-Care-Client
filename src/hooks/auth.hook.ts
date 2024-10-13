@@ -19,9 +19,9 @@ export const useUserRegistration = () => {
         toast.error(data.message);
       }
     },
-    // onError: (error) => {
-    //   toast.error(error.message);
-    // },
+    onError: (error) => {
+      toast.error(error.message);
+    },
   });
 };
 
@@ -36,9 +36,9 @@ export const useUserLogin = () => {
         toast.error(data.message);
       }
     },
-    // onError: (error) => {
-    //   toast.error(error.message);
-    // },
+    onError: (error) => {
+      toast.error(error.message);
+    },
   });
 };
 
@@ -53,9 +53,9 @@ export const useForgotPassword = () => {
         toast.error(data.message);
       }
     },
-    // onError: (error) => {
-    //   toast.error(error.message);
-    // },
+    onError: (error) => {
+      toast.error(error.message);
+    },
   });
 };
 
@@ -70,8 +70,8 @@ export const usePasswordChange = () => {
         toast.error(data.message);
       }
     },
-    // onError: (error) => {
-    //   toast.error(error.message);
-    // },
+    onError: (error) => {
+      toast.error(error.message);
+    },
   });
 };

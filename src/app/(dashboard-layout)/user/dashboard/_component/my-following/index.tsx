@@ -1,13 +1,18 @@
 import React from "react";
-import { useGetFollow } from "@/src/hooks/follow.hook";
+import { useFollowUser, useGetFollow } from "@/src/hooks/follow.hook";
 import { Skeleton } from "@nextui-org/skeleton";
 import { Card, CardHeader } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
 import { IUser } from "@/src/types";
+import { Button } from "@nextui-org/button";
 
 const MyFollowing = () => {
   const { data, isFetching } = useGetFollow();
   const followings = data?.following || [];
+
+  const { mutate: handleFollowUser, isPending } = useFollowUser({
+    invalidateQueries: ["GET_FOLLOW"],
+  });
 
   if (isFetching) {
     return (
@@ -30,15 +35,31 @@ const MyFollowing = () => {
       {followings.length > 0 ? (
         followings.map((following: IUser) => (
           <Card key={following._id} className="mb-4">
-            <CardHeader className="flex items-center">
-              <Avatar
-                isBordered
+            <CardHeader className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Avatar
+                  isBordered
+                  radius="full"
+                  src={following.profilePicture}
+                  alt={`${following.name}'s profile picture`}
+                  className="mr-4"
+                />
+                <div>
+                  <div className="text-lg font-semibold">{following.name}</div>
+                  <div className="text-small font-semibold">
+                    {following.email}
+                  </div>
+                </div>
+              </div>
+              <Button
+                size="sm"
+                color="default"
                 radius="full"
-                src={following.profilePicture}
-                alt={`${following.name}'s profile picture`}
-                className="mr-4"
-              />
-              <div className="text-small font-semibold">{following.name}</div>
+                variant="bordered"
+                onPress={() => handleFollowUser({ followingId: following._id })}
+              >
+                Unfollow
+              </Button>
             </CardHeader>
           </Card>
         ))

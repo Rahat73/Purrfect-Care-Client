@@ -7,7 +7,7 @@ export const purchasePost = async (postId: string) => {
     const { data } = await axiosInstance.post(`/payment/purchase`, { postId });
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
@@ -16,6 +16,6 @@ export const getAllPayments = async () => {
     const { data } = await axiosInstance.get("/payment");
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };

@@ -1,7 +1,6 @@
 "use server";
 
 import { FieldValues } from "react-hook-form";
-import envConfig from "../config/env-config";
 import axiosInstance from "../lib/axios-instance";
 
 export const getUserInfo = async () => {
@@ -9,7 +8,7 @@ export const getUserInfo = async () => {
     const { data } = await axiosInstance.get(`/users/me`);
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
@@ -19,7 +18,7 @@ export const updateProfile = async (updateData: FieldValues) => {
 
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
@@ -28,7 +27,7 @@ export const getAllUsers = async () => {
     const { data } = await axiosInstance.get("/users");
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
@@ -37,7 +36,7 @@ export const makeAdmin = async (userId: string) => {
     const { data } = await axiosInstance.put(`/users/make-admin/${userId}`);
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
@@ -46,6 +45,6 @@ export const blockUser = async (userId: string) => {
     const { data } = await axiosInstance.put(`/users/block/${userId}`);
     return data;
   } catch (error: any) {
-    throw new Error(error.response.data.message);
+    return error.response.data.message;
   }
 };

@@ -37,9 +37,15 @@ export default function NavbarDropdown() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Avatar className="cursor-pointer" src={data?.profilePicture} />
+        <div className="flex items-center gap-2 cursor-pointer">
+          <p className="hidden sm:block">{user?.name}</p>
+          <Avatar className="cursor-pointer" src={data?.profilePicture} />
+        </div>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
+        <DropdownItem>
+          <p className="hidden sm:block">{user?.name}</p>
+        </DropdownItem>
         <DropdownItem onClick={() => handleNavigation("/profile")}>
           Profile
         </DropdownItem>

@@ -1,7 +1,7 @@
 "use client";
 
 import HtmlContentRenderer from "@/src/components/html-content-render";
-import { useDeletePost, useUpdatePost } from "@/src/hooks/post.hook";
+import { useDeletePost } from "@/src/hooks/post.hook";
 import { IPost } from "@/src/types";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
@@ -17,9 +17,6 @@ const MyPostCard = ({ post }: { post: IPost }) => {
   const [seeMoreClicked, setSeeMoreClicked] = useState(false);
 
   const router = useRouter();
-
-  // const { mutate: handleUpdatePost, isPending: editPostLoading } =
-  //   useUpdatePost();
 
   const { mutate: handleDeletePost, isPending: deletePostLoading } =
     useDeletePost();

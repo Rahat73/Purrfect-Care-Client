@@ -30,8 +30,13 @@ export const useUserUpdate = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["UPDATE_PROFILE"],
     mutationFn: async (updateData) => await updateProfile(updateData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["GET_USER_INFO"] });
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ["GET_USER_INFO"] });
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
@@ -58,8 +63,13 @@ export const useMakeAdmin = () => {
   return useMutation<any, Error, string>({
     mutationKey: ["MAKE_ADMIN"],
     mutationFn: async (userId) => await makeAdmin(userId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["GET_ALL_USERS"] });
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ["GET_ALL_USERS"] });
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
@@ -72,8 +82,13 @@ export const useBlockUser = () => {
   return useMutation<any, Error, string>({
     mutationKey: ["BLOCK_USER"],
     mutationFn: async (userId) => await blockUser(userId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["GET_ALL_USERS"] });
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ["GET_ALL_USERS"] });
+        toast.success("User block status changed successfully");
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error: any) => {
       toast.error(error.message);
