@@ -32,19 +32,24 @@ const LoginPage = () => {
       return;
     }
 
+    if (redirect) {
+      router.push(redirect);
+    } else {
+      router.push("/");
+    }
     setLoginSuccess(true);
     userLoading(true);
   };
 
-  useEffect(() => {
-    if (!isPending && loginSuccess) {
-      if (redirect) {
-        router.push(redirect);
-      } else {
-        router.push("/");
-      }
-    }
-  }, [isPending, loginSuccess]);
+  // useEffect(() => {
+  //   if (!isPending && loginSuccess) {
+  //     if (redirect) {
+  //       router.push(redirect);
+  //     } else {
+  //       router.push("/");
+  //     }
+  //   }
+  // }, [isPending, loginSuccess]);
 
   return (
     <div className="flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center">

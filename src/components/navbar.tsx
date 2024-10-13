@@ -1,6 +1,5 @@
 "use client";
 
-import { Link } from "@nextui-org/link";
 import {
   NavbarBrand,
   NavbarContent,
@@ -10,16 +9,15 @@ import {
   NavbarMenuToggle,
   Navbar as NextUINavbar,
 } from "@nextui-org/navbar";
-import { link as linkStyles } from "@nextui-org/theme";
-import clsx from "clsx";
 import NextLink from "next/link";
 
-import { Logo } from "@/src/components/icons";
 import { siteConfig } from "@/src/config/site";
-import { ThemeSwitch } from "./theme-switch";
 import { useUser } from "@/src/context/user.provider";
-import NavbarDropdown from "./navbar-dropdown";
 import { Button } from "@nextui-org/button";
+import { FaPaw } from "react-icons/fa6";
+import NavbarDropdown from "./navbar-dropdown";
+import { ThemeSwitch } from "./theme-switch";
+import Link from "next/link";
 
 export const Navbar = () => {
   const { user, isLoading } = useUser();
@@ -29,11 +27,19 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">Purrfect Care</p>
+            <FaPaw className="text-xl" />
+            <p className="font-bold text-inherit text-xl">Purrfect Care</p>
           </NextLink>
         </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2"></ul>
+        <ul className="hidden md:flex gap-4 justify-start ml-4">
+          {siteConfig.navMenuItems.map((item, index) => (
+            <NavbarItem key={`${item}-${index}`}>
+              <Link color={"foreground"} href={item.href} className="text-md">
+                {item.label}
+              </Link>
+            </NavbarItem>
+          ))}
+        </ul>
       </NavbarContent>
 
       <NavbarContent
@@ -78,14 +84,14 @@ export const Navbar = () => {
 
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
-          {/* {siteConfig.navMenuItems.map((item, index) => (
+          {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link color={"foreground"} href={item.href} size="lg">
+              <Link color={"foreground"} href={item.href}>
                 {item.label}
               </Link>
             </NavbarMenuItem>
-          ))} */}
-          <div className="mb-6">
+          ))}
+          <div className="my-6">
             <h2 className="font-semibold text-lg">Filter</h2>
             <ul className="mt-2">
               <li className="hover:bg-default-200 transition-all rounded-md p-2">

@@ -5,7 +5,7 @@ import { Card } from "@nextui-org/card";
 import { Select, SelectItem } from "@nextui-org/select";
 import { Spacer } from "@nextui-org/spacer";
 import { useState } from "react";
-import nutritionData from "../../../../../../assests/nutrition-outline.json";
+import nutritionData from "../../../../../../assets/nutrition-outline.json";
 import { FaUndo } from "react-icons/fa";
 import { FaFilePdf } from "react-icons/fa6";
 import { PDFDownloadLink } from "@react-pdf/renderer";

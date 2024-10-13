@@ -4,7 +4,20 @@ export const siteConfig = {
   name: "Purrfect care",
   description:
     "PawTales is a community-driven platform where pet lovers share care tips, stories, and advice. Whether you're seeking expert pet care insights or heartwarming tales, PawTales offers a space to connect, learn, and inspire with premium content and interactive features.",
-  navItems: [],
+  navItems: [
+    {
+      label: "Home",
+      href: "/",
+    },
+    {
+      label: "About",
+      href: "/about",
+    },
+    {
+      label: "Contact",
+      href: "/contact",
+    },
+  ],
   navMenuItems: [
     {
       label: "Home",
@@ -13,6 +26,10 @@ export const siteConfig = {
     {
       label: "About",
       href: "/about",
+    },
+    {
+      label: "Contact",
+      href: "/contact",
     },
   ],
 };

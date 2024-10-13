@@ -25,6 +25,7 @@ import {
   FaThumbsDown,
   FaThumbsUp,
 } from "react-icons/fa6";
+import { toast } from "sonner";
 
 export default function PostCard({ post }: { post: IPost }) {
   const { data: user } = useUserInfo();
@@ -196,8 +197,12 @@ export default function PostCard({ post }: { post: IPost }) {
                 size="sm"
                 color="warning"
                 onPress={async () => {
-                  const data = await purchasePost(localPost._id);
-                  window.location.href = data.data.payment_url;
+                  if (loggedinUser) {
+                    const data = await purchasePost(localPost._id);
+                    window.location.href = data.data.payment_url;
+                  } else {
+                    toast.error("Please login first");
+                  }
                 }}
                 isLoading={purchasePending}
               >
