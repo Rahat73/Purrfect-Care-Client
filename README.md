@@ -42,11 +42,10 @@ Purrfect Care is a comprehensive platform designed to provide expert tips, engag
    - Users can easily change their password from their profile settings, enhancing account security with minimal effort.
    - Users can reset their passwords through a secure process that involves email verification to ensure account safety.
 
-6. **Coupon and Discount System:**
+6. **Payment System:**
 
-   - A spinning wheel game that users can play to win discount codes.
-   - Coupons management system for admins to create, update, and delete coupons.
-   - Functionality to apply coupons at checkout, reducing the total rental cost.
+   - Users can pay for premium posts with the help of amarpay payment gateway.
+   - After successful payment, posts will be automatically unblurred.
 
 7. **Searching, Filtering, and Sorting:**
 
@@ -63,16 +62,11 @@ Purrfect Care is a comprehensive platform designed to provide expert tips, engag
 
    - A personalized pet nutrition calculator based on their species, age, and weight.
 
-10. **Promotions and Special Offers:**
-
-    - A section for displaying active promotions and discounts.
-    - Clear instructions on how to apply promotional codes at checkout.
-
-11. **Dark/Light Mode:**
+10. **Dark/Light Mode:**
 
     - Theme switching functionality allowing users to toggle between dark and light modes.
 
-12. **Error Handling and Notifications:**
+11. **Error Handling and Notifications:**
     - Real-time notifications and error handling for a better user experience.
     - Toast notifications to inform users of successful actions or errors during processes like booking, payment, or coupon application.
 
