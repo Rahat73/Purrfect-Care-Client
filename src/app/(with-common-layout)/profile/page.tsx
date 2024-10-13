@@ -100,7 +100,6 @@ export default function ProfilePage() {
 
     handleUpdateProfile(updateData, {
       onSuccess: () => {
-        toast.success("Profile updated successfully");
         closeModal();
       },
     });

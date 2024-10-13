@@ -34,20 +34,20 @@ export default function RegisterPage() {
       return;
     }
 
+    router.push("/");
     setLoginSuccess(true);
-
     userLoading(true);
   };
 
-  useEffect(() => {
-    if (!isPending && loginSuccess) {
-      if (redirect) {
-        router.push(redirect);
-      } else {
-        router.push("/");
-      }
-    }
-  }, [isPending, loginSuccess]);
+  // useEffect(() => {
+  //   if (!isPending && loginSuccess) {
+  //     if (redirect) {
+  //       router.push(redirect);
+  //     } else {
+  //       router.push("/");
+  //     }
+  //   }
+  // }, [isPending, loginSuccess]);
 
   return (
     <div>
