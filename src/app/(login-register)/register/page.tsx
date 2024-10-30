@@ -51,7 +51,7 @@ export default function RegisterPage() {
 
   return (
     <div>
-      <div className="flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center">
+      <div className="flex w-full h-full flex-col items-center justify-center">
         <h3 className="my-2 text-2xl font-bold">Sign up with Purrfect Care</h3>
         <p className="mb-4">Let&lsquo;s Get You Signed Up !</p>
         <div className="w-10/12 md:w-[35%]">

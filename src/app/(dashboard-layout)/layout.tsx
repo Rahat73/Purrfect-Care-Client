@@ -8,7 +8,7 @@ import BottomNavbar from "../(with-common-layout)/_component/bottom-navbar";
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    template: `%s - Dashboard`,
   },
   description: siteConfig.description,
   icons: {

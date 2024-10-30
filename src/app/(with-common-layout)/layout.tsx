@@ -30,7 +30,7 @@ export default function WithCommonLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="">
+    <div className="mb-12 md:mb-0">
       <Navbar />
       <div className="max-w-screen-2xl mx-auto grid grid-cols-3 md:grid-cols-4">
         {/* Left Sidebar */}

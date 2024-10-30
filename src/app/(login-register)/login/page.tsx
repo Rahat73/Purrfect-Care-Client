@@ -52,7 +52,7 @@ const LoginPage = () => {
   // }, [isPending, loginSuccess]);
 
   return (
-    <div className="flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center">
+    <div className="flex w-full h-full flex-col items-center justify-center">
       <h3 className="my-2 text-2xl font-bold">Login with Purrfect Care</h3>
       <p className="mb-4">Welcome Back! Let&lsquo;s Get Started</p>
       <div className="w-10/12 md:w-[35%]">

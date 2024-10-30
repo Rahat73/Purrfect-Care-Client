@@ -10,7 +10,7 @@ import { Providers } from "../../lib/providers";
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    template: `%s - ${"Join the community"}`,
   },
   description: siteConfig.description,
   icons: {
@@ -31,9 +31,8 @@ export default function LoginRegisterLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative flex flex-col min-h-screen w-full">
-      <main className="container mx-auto pt-16 flex-grow">{children}</main>
-      <footer className="w-full flex items-center justify-center py-3"></footer>
+    <div className="relative flex flex-col justify-center items-center min-h-screen w-full">
+      <main className="container mx-auto">{children}</main>
     </div>
   );
 }
